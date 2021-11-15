@@ -116,18 +116,103 @@
         <!--Currency-->
         <scene sceneID="atE-w0-D7U">
             <objects>
-                <viewController id="FaY-uA-yMX" userLabel="Currency" customClass="ViewController" customModule="Travel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eks-vc-rxe">
+                <viewController id="FaY-uA-yMX" userLabel="Currency" customClass="CurrencyViewController" customModule="Travel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eks-vc-rxe" customClass="currency">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Convertir :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6r-3R-XPm">
+                                <rect key="frame" x="50" y="94" width="314" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5s-B1-hVl">
+                                <rect key="frame" x="50" y="288.5" width="314" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="D9d-yh-yNd"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Charger"/>
+                                <connections>
+                                    <action selector="didTapLoad:" destination="FaY-uA-yMX" eventType="touchUpInside" id="86j-NS-OtW"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z8s-tP-ZwC">
+                                <rect key="frame" x="50" y="128.5" width="314" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Des :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojy-SG-aFZ" userLabel="Des">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awS-38-FCV">
+                                        <rect key="frame" x="80" y="0.0" width="75" height="50"/>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9Q-TM-wg9" userLabel="En">
+                                        <rect key="frame" x="159.5" y="0.0" width="75" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftx-Cx-SxF">
+                                        <rect key="frame" x="240" y="0.0" width="74" height="50"/>
+                                    </pickerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="KrY-Oe-hxL"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TvW-sq-L6f">
+                                <rect key="frame" x="50" y="208.5" width="314" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iq3-tc-9uw" userLabel="Amount">
+                                        <rect key="frame" x="0.0" y="0.0" width="152" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckc-q1-07X" userLabel="Result">
+                                        <rect key="frame" x="162" y="0.0" width="152" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="l9q-Se-fiR"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="8Fl-dr-6Dh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="j6r-3R-XPm" secondAttribute="trailing" constant="50" id="0Oz-fD-3F4"/>
+                            <constraint firstItem="TvW-sq-L6f" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="1N1-Q4-YSm"/>
+                            <constraint firstItem="I5s-B1-hVl" firstAttribute="top" secondItem="TvW-sq-L6f" secondAttribute="bottom" constant="30" id="3yA-0h-iZc"/>
+                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="I5s-B1-hVl" secondAttribute="trailing" constant="50" id="A90-dO-GFj"/>
+                            <constraint firstItem="Z8s-tP-ZwC" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="CBd-a4-5bK"/>
+                            <constraint firstItem="I5s-B1-hVl" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="Ctt-Wh-NDu"/>
+                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="TvW-sq-L6f" secondAttribute="trailing" constant="50" id="Hs1-aJ-lEV"/>
+                            <constraint firstItem="j6r-3R-XPm" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="JlL-Xz-NtA"/>
+                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="bottom" secondItem="I5s-B1-hVl" secondAttribute="bottom" constant="489.5" id="SAG-lB-j0r"/>
+                            <constraint firstItem="I5s-B1-hVl" firstAttribute="top" secondItem="TvW-sq-L6f" secondAttribute="bottom" constant="30" id="Utj-Re-3dC"/>
+                            <constraint firstItem="j6r-3R-XPm" firstAttribute="top" secondItem="8Fl-dr-6Dh" secondAttribute="top" constant="50" id="cvI-y2-gY7"/>
+                            <constraint firstItem="TvW-sq-L6f" firstAttribute="top" secondItem="Z8s-tP-ZwC" secondAttribute="bottom" constant="30" id="lui-iO-kV7"/>
+                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="Z8s-tP-ZwC" secondAttribute="trailing" constant="50" id="ohM-9n-Wdr"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="UBf-05-92y"/>
+                    <connections>
+                        <outlet property="amountTextField" destination="Iq3-tc-9uw" id="YI4-YL-qq3"/>
+                        <outlet property="fromPicker" destination="awS-38-FCV" id="RDN-xU-Tcn"/>
+                        <outlet property="resultLabel" destination="ckc-q1-07X" id="Bd0-Gk-Rz7"/>
+                        <outlet property="toPicker" destination="ftx-Cx-SxF" id="H79-K9-o5C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCt-3b-AEo" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1987" y="-244"/>
+            <point key="canvasLocation" x="1986.9565217391305" y="-244.41964285714283"/>
         </scene>
         <!--Translate-->
         <scene sceneID="jwe-gt-3rO">

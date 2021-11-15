@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		521E8B8A273D8C7900A7BB0C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521E8B89273D8C7900A7BB0C /* Token.swift */; };
 		521E8B8C273EBFDB00A7BB0C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521E8B8B273EBFDB00A7BB0C /* Extension.swift */; };
+		521E8B8E27419E5700A7BB0C /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521E8B8D27419E5700A7BB0C /* CurrencyModel.swift */; };
 		52A1C75F273AAFD100BFA463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A1C75E273AAFD100BFA463 /* AppDelegate.swift */; };
 		52A1C761273AAFD100BFA463 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A1C760273AAFD100BFA463 /* SceneDelegate.swift */; };
 		52A1C763273AAFD100BFA463 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A1C762273AAFD100BFA463 /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		521E8B89273D8C7900A7BB0C /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		521E8B8B273EBFDB00A7BB0C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		521E8B8D27419E5700A7BB0C /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		52A1C75B273AAFD100BFA463 /* Travel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Travel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A1C75E273AAFD100BFA463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52A1C760273AAFD100BFA463 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				52A1C79F273AC73400BFA463 /* WeatherModel.swift */,
+				521E8B8D27419E5700A7BB0C /* CurrencyModel.swift */,
 				52A1C799273ABEED00BFA463 /* WeatherService.swift */,
 				52A1C79B273ABF0400BFA463 /* CurrencyService.swift */,
 				52A1C79D273ABF3200BFA463 /* TranslateService.swift */,
@@ -325,6 +328,7 @@
 				52A1C75F273AAFD100BFA463 /* AppDelegate.swift in Sources */,
 				521E8B8A273D8C7900A7BB0C /* Token.swift in Sources */,
 				52A1C79E273ABF3200BFA463 /* TranslateService.swift in Sources */,
+				521E8B8E27419E5700A7BB0C /* CurrencyModel.swift in Sources */,
 				52A1C761273AAFD100BFA463 /* SceneDelegate.swift in Sources */,
 				52A1C794273ABDD300BFA463 /* CurrencyViewController.swift in Sources */,
 				52A1C796273ABE2100BFA463 /* TranslateViewController.swift in Sources */,
