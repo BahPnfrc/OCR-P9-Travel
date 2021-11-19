@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Travel
-//
-//  Created by Genapi on 09/11/2021.
-//
-
 import UIKit
 
 class ViewController: UIViewController {

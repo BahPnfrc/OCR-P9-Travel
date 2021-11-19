@@ -100,7 +100,7 @@
                             <constraint firstItem="FuV-OH-fi2" firstAttribute="top" secondItem="8Vm-I4-Lyp" secondAttribute="top" id="x6j-n6-HsC"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="VEV-T4-1C3"/>
+                    <tabBarItem key="tabBarItem" title="Météo" image="icloud.fill" catalog="system" selectedImage="icloud.fill" id="VEV-T4-1C3"/>
                     <connections>
                         <outlet property="cityLabel" destination="0q6-q0-l5C" id="eYP-Gk-pCQ"/>
                         <outlet property="cityTextField" destination="FuV-OH-fi2" id="qDm-ku-IeV"/>
@@ -121,94 +121,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Convertir :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6r-3R-XPm">
-                                <rect key="frame" x="50" y="94" width="314" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5s-B1-hVl">
-                                <rect key="frame" x="50" y="288.5" width="314" height="35"/>
+                                <rect key="frame" x="50" y="94" width="314" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="D9d-yh-yNd"/>
+                                    <constraint firstAttribute="height" constant="31" id="D9d-yh-yNd"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Charger"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                 <connections>
-                                    <action selector="didTapLoad:" destination="FaY-uA-yMX" eventType="touchUpInside" id="86j-NS-OtW"/>
+                                    <action selector="didTapButton:" destination="FaY-uA-yMX" eventType="touchUpInside" id="lKU-jE-jTB"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z8s-tP-ZwC">
-                                <rect key="frame" x="50" y="128.5" width="314" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Des :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojy-SG-aFZ" userLabel="Des">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awS-38-FCV">
-                                        <rect key="frame" x="80" y="0.0" width="74.5" height="50"/>
-                                    </pickerView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9Q-TM-wg9" userLabel="En">
-                                        <rect key="frame" x="159.5" y="0.0" width="75" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftx-Cx-SxF">
-                                        <rect key="frame" x="239.5" y="0.0" width="74.5" height="50"/>
-                                    </pickerView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="KrY-Oe-hxL"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TvW-sq-L6f">
-                                <rect key="frame" x="50" y="208.5" width="314" height="50"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iq3-tc-9uw" userLabel="Amount">
-                                        <rect key="frame" x="0.0" y="0.0" width="152" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckc-q1-07X" userLabel="Result">
-                                        <rect key="frame" x="162" y="0.0" width="152" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="l9q-Se-fiR"/>
-                                </constraints>
-                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Fl-dr-6Dh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="j6r-3R-XPm" secondAttribute="trailing" constant="50" id="0Oz-fD-3F4"/>
-                            <constraint firstItem="TvW-sq-L6f" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="1N1-Q4-YSm"/>
-                            <constraint firstItem="I5s-B1-hVl" firstAttribute="top" secondItem="TvW-sq-L6f" secondAttribute="bottom" constant="30" id="3yA-0h-iZc"/>
                             <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="I5s-B1-hVl" secondAttribute="trailing" constant="50" id="A90-dO-GFj"/>
-                            <constraint firstItem="Z8s-tP-ZwC" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="CBd-a4-5bK"/>
                             <constraint firstItem="I5s-B1-hVl" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="Ctt-Wh-NDu"/>
-                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="TvW-sq-L6f" secondAttribute="trailing" constant="50" id="Hs1-aJ-lEV"/>
-                            <constraint firstItem="j6r-3R-XPm" firstAttribute="leading" secondItem="8Fl-dr-6Dh" secondAttribute="leading" constant="50" id="JlL-Xz-NtA"/>
-                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="bottom" secondItem="I5s-B1-hVl" secondAttribute="bottom" constant="489.5" id="SAG-lB-j0r"/>
-                            <constraint firstItem="I5s-B1-hVl" firstAttribute="top" secondItem="TvW-sq-L6f" secondAttribute="bottom" constant="30" id="Utj-Re-3dC"/>
-                            <constraint firstItem="j6r-3R-XPm" firstAttribute="top" secondItem="8Fl-dr-6Dh" secondAttribute="top" constant="50" id="cvI-y2-gY7"/>
-                            <constraint firstItem="TvW-sq-L6f" firstAttribute="top" secondItem="Z8s-tP-ZwC" secondAttribute="bottom" constant="30" id="lui-iO-kV7"/>
-                            <constraint firstItem="8Fl-dr-6Dh" firstAttribute="trailing" secondItem="Z8s-tP-ZwC" secondAttribute="trailing" constant="50" id="ohM-9n-Wdr"/>
+                            <constraint firstItem="I5s-B1-hVl" firstAttribute="top" secondItem="8Fl-dr-6Dh" secondAttribute="top" constant="50" id="YFe-TK-Pn4"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="UBf-05-92y"/>
-                    <connections>
-                        <outlet property="amountTextField" destination="Iq3-tc-9uw" id="YI4-YL-qq3"/>
-                        <outlet property="fromPicker" destination="awS-38-FCV" id="RDN-xU-Tcn"/>
-                        <outlet property="resultLabel" destination="ckc-q1-07X" id="Bd0-Gk-Rz7"/>
-                        <outlet property="toPicker" destination="ftx-Cx-SxF" id="H79-K9-o5C"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="Conversion" image="dollarsign.circle.fill" catalog="system" selectedImage="dollarsign.circle.fill" id="UBf-05-92y"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCt-3b-AEo" sceneMemberID="firstResponder"/>
             </objects>
@@ -242,7 +175,7 @@
                             <constraint firstItem="116-xQ-ZL9" firstAttribute="top" secondItem="dKf-XQ-eUx" secondAttribute="top" constant="50" id="qLf-Au-Yux"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="pKV-Iy-dbi"/>
+                    <tabBarItem key="tabBarItem" title="Traduction" image="book.fill" catalog="system" selectedImage="book.fill" id="pKV-Iy-dbi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zy9-4r-xL4" sceneMemberID="firstResponder"/>
             </objects>
@@ -250,6 +183,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="book.fill" catalog="system" width="128" height="95"/>
+        <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="icloud.fill" catalog="system" width="128" height="88"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

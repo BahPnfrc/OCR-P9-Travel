@@ -1,10 +1,3 @@
-//
-//  NetworkError.swift
-//  Travel
-//
-//  Created by Genapi on 19/11/2021.
-//
-
 import Foundation
 
 enum ServiceError {

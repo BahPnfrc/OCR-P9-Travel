@@ -1,14 +1,7 @@
-//
-//  TravelTests.swift
-//  TravelTests
-//
-//  Created by Genapi on 09/11/2021.
-//
-
 import XCTest
 @testable import Travel
 
-class TravelTests: XCTestCase {
+class WeatherServiceTestCase: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

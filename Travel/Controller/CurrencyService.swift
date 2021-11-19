@@ -1,10 +1,3 @@
-//
-//  CurrencyService.swift
-//  Travel
-//
-//  Created by Genapi on 09/11/2021.
-//
-
 import Foundation
 
 class CurrencyService {
@@ -15,8 +8,8 @@ class CurrencyService {
     // https://developer.apple.com/news/?id=jxky8h89
     // https://fixer.io/documentation
     private let baseUrl = "http://data.fixer.io/api/"
-    private let paramUrl = "latest?access_key=\(Param.forToken)"
-        + "&from=\(Param.forCurrency)"
+    private let paramUrl = "latest?access_key=\(Param.forToken.rawValue)"
+    + "&from=\(Param.forCurrency.rawValue)"
     
     private var task: URLSessionDataTask?
     

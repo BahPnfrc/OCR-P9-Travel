@@ -1,10 +1,3 @@
-//
-//  TranslateViewController.swift
-//  Travel
-//
-//  Created by Genapi on 09/11/2021.
-//
-
 import Foundation
 import UIKit
 
@@ -19,12 +12,11 @@ class TranslateViewController: UIViewController {
          TranslateService.shared.getTranslation(of: text, from: from, to: to) { (success, value) in
             
              if success, let value = value {
-                 print(value.data.translations[0].translatedText)
+                 print("🟢 Translate service : " + value.data.translations[0].translatedText)
+             } else {
+                 print("🔴 Translate service : Failed")
              }
-            
-            
-        
         }
-        
     }
+    
 }
