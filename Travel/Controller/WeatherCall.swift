@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class WeatherService {
+class WeatherCall {
     
-    static let shared = WeatherService()
+    static let shared = WeatherCall()
     private init() {}
     
     private let baseUrl = "https://api.openweathermap.org/data/2.5/"

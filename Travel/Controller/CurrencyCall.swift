@@ -7,27 +7,28 @@
 
 import Foundation
 
-class CurrencyService {
+class CurrencyCall {
     
-    static let shared = CurrencyService()
+    static let shared = CurrencyCall()
     private init() {}
     
     // https://developer.apple.com/news/?id=jxky8h89
+    // https://fixer.io/documentation
     private let baseUrl = "http://data.fixer.io/api/"
-    private let paramUrl = "latest?access_key=--token--"
-        + "&from=--from--"
+    private let paramUrl = "latest?access_key=\(Param.forToken)"
+        + "&from=\(Param.forCurrency)"
     
     private var task: URLSessionDataTask?
     
-    enum UrlKey: String {
+    enum Param: String {
             case forToken = "--token--"
-            case forCurrency = "--from--"
+            case forCurrency = "--currency--"
         }
     
     enum Currency: String {
         case euro = "EUR"
-        case usDollar = "USD"
         case greatBritainPound = "GBP"
+        case usDollar = "USD"
     }
     
     func getConversion(of amount: Int, from fromCurrency: Currency, to toCurrency: Currency, callBack: @escaping (Bool, Double?) -> Void) {
@@ -53,8 +54,8 @@ class CurrencyService {
         
         let session = URLSession(configuration: .default)
         let paramUrl = paramUrl
-            .replacingOccurrences(of: UrlKey.forToken.rawValue, with: Token.forCurrency)
-            .replacingOccurrences(of: UrlKey.forCurrency.rawValue, with: currency.rawValue)
+            .replacingOccurrences(of: Param.forToken.rawValue, with: Token.forCurrency)
+            .replacingOccurrences(of: Param.forCurrency.rawValue, with: currency.rawValue)
         
         let url = URL(string: baseUrl + paramUrl)
         
@@ -84,7 +85,5 @@ class CurrencyService {
         task?.resume()
         
     }
-    
-    
     
 }

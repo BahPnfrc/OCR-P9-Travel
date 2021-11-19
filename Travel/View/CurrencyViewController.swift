@@ -19,9 +19,9 @@ class CurrencyViewController: UIViewController {
     @IBAction func didTapLoad(_ sender: Any) {
         
         let amount = 10
-        let from = CurrencyService.Currency.euro
-        let to = CurrencyService.Currency.usDollar
-        CurrencyService.shared.getConversion(of: amount, from: from, to: to) { (success, value) in
+        let from = CurrencyCall.Currency.euro
+        let to = CurrencyCall.Currency.usDollar
+        CurrencyCall.shared.getConversion(of: amount, from: from, to: to) { (success, value) in
             
             if success, let value = value {
                 print(value.toString() + " " + to.rawValue)

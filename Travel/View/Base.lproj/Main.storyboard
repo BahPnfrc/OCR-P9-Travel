@@ -148,7 +148,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awS-38-FCV">
-                                        <rect key="frame" x="80" y="0.0" width="75" height="50"/>
+                                        <rect key="frame" x="80" y="0.0" width="74.5" height="50"/>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9Q-TM-wg9" userLabel="En">
                                         <rect key="frame" x="159.5" y="0.0" width="75" height="50"/>
@@ -157,7 +157,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftx-Cx-SxF">
-                                        <rect key="frame" x="240" y="0.0" width="74" height="50"/>
+                                        <rect key="frame" x="239.5" y="0.0" width="74.5" height="50"/>
                                     </pickerView>
                                 </subviews>
                                 <constraints>
@@ -217,18 +217,36 @@
         <!--Translate-->
         <scene sceneID="jwe-gt-3rO">
             <objects>
-                <viewController id="f9k-0b-2Uh" userLabel="Translate" customClass="ViewController" customModule="Travel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="f9k-0b-2Uh" userLabel="Translate" customClass="TranslateViewController" customModule="Travel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7ue-59-PHP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="116-xQ-ZL9">
+                                <rect key="frame" x="50" y="94" width="314" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="9ym-7f-sOq"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <action selector="didTapButton:" destination="f9k-0b-2Uh" eventType="touchUpInside" id="dHD-Lv-32a"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dKf-XQ-eUx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="116-xQ-ZL9" firstAttribute="leading" secondItem="dKf-XQ-eUx" secondAttribute="leading" constant="50" id="ak7-dC-bhW"/>
+                            <constraint firstItem="dKf-XQ-eUx" firstAttribute="trailing" secondItem="116-xQ-ZL9" secondAttribute="trailing" constant="50" id="gMU-Bh-8B8"/>
+                            <constraint firstItem="116-xQ-ZL9" firstAttribute="top" secondItem="dKf-XQ-eUx" secondAttribute="top" constant="50" id="qLf-Au-Yux"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="pKV-Iy-dbi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zy9-4r-xL4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1177" y="445"/>
+            <point key="canvasLocation" x="1176.8115942028987" y="444.64285714285711"/>
         </scene>
     </scenes>
     <resources>
