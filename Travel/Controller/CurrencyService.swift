@@ -7,9 +7,9 @@
 
 import Foundation
 
-class CurrencyCall {
+class CurrencyService {
     
-    static let shared = CurrencyCall()
+    static let shared = CurrencyService()
     private init() {}
     
     // https://developer.apple.com/news/?id=jxky8h89

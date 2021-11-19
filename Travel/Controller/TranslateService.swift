@@ -7,9 +7,9 @@
 
 import Foundation
 
-class TranslateCall {
+class TranslateService {
     
-    static let shared = TranslateCall()
+    static let shared = TranslateService()
     private init() {}
     
     // https://cloud.google.com/translate/docs/basic/quickstart

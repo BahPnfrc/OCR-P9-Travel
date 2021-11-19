@@ -29,7 +29,7 @@ class WeatherViewController: UIViewController {
             return
         }
         
-        WeatherCall.shared.getWeather(forCity: city) { success, weatherModel in
+        WeatherService.shared.getWeather(forCity: city) { success, weatherModel in
             
             guard success, let weatherModel = weatherModel else {
             
@@ -46,7 +46,7 @@ class WeatherViewController: UIViewController {
             self.weatherLabel.text = "Temps : " + weatherModel.weather[0].weatherDescription
             
             let icon = weatherModel.weather[0].icon
-            WeatherCall.shared.getIcon(forCode: icon) { success, image in
+            WeatherService.shared.getIcon(forCode: icon) { success, image in
                 if success, let image = image {
                     self.weatherImageView.image = image
                 }

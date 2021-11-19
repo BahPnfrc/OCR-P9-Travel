@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CallError {
+enum ServiceError {
     case invalidUrl(error: String)
     case returned(error: NSError)
     case invalidResponse(response: URLResponse)
