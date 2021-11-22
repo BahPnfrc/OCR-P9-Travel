@@ -5,22 +5,24 @@ class TranslateService {
     static let shared = TranslateService()
     private init() {}
     
-    // https://cloud.google.com/translate/docs/basic/quickstart
+    private var task: URLSessionDataTask?
+    private var session = URLSession(configuration: .default)
     
-    enum UrlComponent: String {
-        case scheme = "https"
-        case host = "translation.googleapis.com"
-        case path = "/language/translate/v2"
+    init(session: URLSession) {
+        self.session = session
     }
+    
+    // MARK: - Parameters
+    
+    // https://cloud.google.com/translate/docs/basic/quickstart
+    let baseUrl = "https://translation.googleapis.com//language/translate/v2"
     
     enum UrlQuery: String {
         case token = "key"
         case input = "q"
         case source, target, format
     }
-    
-    private var task: URLSessionDataTask?
-    
+
     // https://cloud.google.com/translate/docs/languages
     enum Langage: String {
         case french = "fr"
@@ -35,12 +37,14 @@ class TranslateService {
         case swahili = "sw"
     }
     
-    func getTranslation(of input: String, from source: Langage = .french, to target: Langage, callback: @escaping (Bool, TranslateModel?) -> Void) {
+    // MARK: - Network Call
     
-        var urlComponents = URLComponents()
-        urlComponents.scheme = UrlComponent.scheme.rawValue
-        urlComponents.host = UrlComponent.host.rawValue
-        urlComponents.path = UrlComponent.path.rawValue
+    func getTranslation(of input: String, from source: Langage = .french, to target: Langage, completion: @escaping (Result<TranslateModel, APIError>) -> Void) {
+    
+        guard var urlComponents = URLComponents(string: baseUrl) else {
+            completion(.failure(.url))
+            return
+        }
         
         urlComponents.queryItems = [
             URLQueryItem(name: UrlQuery.token.rawValue, value: Token.forTranslate),
@@ -51,30 +55,26 @@ class TranslateService {
         ]
     
         guard let components = urlComponents.string, let url = URL(string: components) else {
-            callback(false, nil)
+            completion(.failure(.query))
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let session = URLSession(configuration: .default)
-        
         task?.cancel()
         task = session.dataTask(with: request) { (data, response, error) in
-
             guard let data = data, error == nil,
                   let response = response as? HTTPURLResponse,
                   response.statusCode == 200 else {
-                      callback(false, nil)
+                      completion(.failure(.server))
                       return
                   }
             guard let translateModel = try? JSONDecoder().decode(TranslateModel.self, from: data) else {
-                callback(false, nil)
+                completion(.failure(.decoding))
                 return
             }
-            callback(true, translateModel)
-            
+            completion(.success(translateModel))
         }
         task?.resume()
     }

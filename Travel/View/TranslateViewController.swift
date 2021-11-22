@@ -5,16 +5,18 @@ class TranslateViewController: UIViewController {
     
     @IBAction func didTapButton(_ sender: Any) {
         
-        let text = "Tout va bien"
+        let text = "Aujourd'hui"
         let from = TranslateService.Langage.french
-        let to = TranslateService.Langage.japanese
+        let to = TranslateService.Langage.russian
         
-         TranslateService.shared.getTranslation(of: text, from: from, to: to) { (success, value) in
+         TranslateService.shared.getTranslation(of: text, from: from, to: to) { result in
             
-             if success, let value = value {
-                 print("🟢 Translate service : " + value.data.translations[0].translatedText)
-             } else {
+             switch result {
+             case .failure(let error):
+                 print(error.localizedDescription)
                  print("🔴 Translate service : Failed")
+             case .success(let model):
+                 print("🟢 Translate service : " + model.data.translations[0].translatedText)
              }
         }
     }

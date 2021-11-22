@@ -1,9 +1,9 @@
 import Foundation
 
-class CurrencyResponseDataFake {
+class FakeTranslateResponseData: FakeResponseData {
     // MARK: - Fake Data
     static var dataOK: Data? {
-        let bundle = Bundle(for: CurrencyResponseDataFake.self)
+        let bundle = Bundle(for: FakeTranslateResponseData.self)
         let url = bundle.url(forResource: "Currency", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         return data

@@ -1,6 +1,6 @@
 import Foundation
 
-class ResponseDataFake {
+class FakeResponseData {
     // MARK: - Fake Data
     static let dataKO = "dataKO".data(using: .utf8)!
     
@@ -18,3 +18,7 @@ class ResponseDataFake {
     static let error = ResponseError()
     
 }
+
+// faire un URL TEST protocol et virer URL fake
+
+

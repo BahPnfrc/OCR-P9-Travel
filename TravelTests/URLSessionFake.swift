@@ -2,6 +2,7 @@ import Foundation
 
 class URLSessionFake: URLSession {
     
+    let pro = URLProtocol()
     var data: Data?
     var response: URLResponse?
     var error: Error?

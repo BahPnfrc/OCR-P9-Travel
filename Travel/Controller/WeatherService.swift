@@ -1,52 +1,54 @@
 import Foundation
 import UIKit
 
+enum Units: String {
+    case standard
+    case metric
+    case imperial
+}
+
 class WeatherService {
     
     static let shared = WeatherService()
     private init() {}
     
-    private let baseUrl = "https://api.openweathermap.org/data/2.5/"
-    private let paramUrl = "weather?q=\(UrlKey.forCity.rawValue)"
-    + "&appid=\(UrlKey.forToken.rawValue)"
-    + "&lang=\(UrlKey.forLang.rawValue)"
-    + "&units=\(UrlKey.forUnit.rawValue)"
-    private let iconURL = "https://openweathermap.org/img/wn/\(UrlKey.forCode.rawValue)@2x.png"
-    
     private var task: URLSessionDataTask?
     private var weatherSession = URLSession(configuration: .default)
     private var imageSession = URLSession(configuration: .default)
     
-    init(weatherSession: URLSession, imageSession: URLSession){
+    init(weatherSession: URLSession){
         self.weatherSession = weatherSession
+    }
+    init(imageSession: URLSession){
         self.imageSession = imageSession
     }
     
-    enum UrlKey: String {
-            case forCity = "--city--"
-            case forToken = "--token--"
-            case forLang = "--lang--"
-            case forCode = "--code--"
-            case forUnit = "--unit--"
-        }
+    // MARK: - Weather call
     
-    enum Units: String {
-        case standard
-        case metric
-        case imperial
+    private let baseURL = "https://api.openweathermap.org/data/2.5/weather"
+
+    enum baseQueryItem: String {
+        case city = "q"
+        case token = "appid"
+        case lang, units
     }
     
-    func getWeather(forCity city: String, callback: @escaping (Bool, WeatherModel?) -> Void) {
-        let paramUrl = paramUrl
-            .replacingOccurrences(of: UrlKey.forCity.rawValue, with: city)
-            .replacingOccurrences(of: UrlKey.forToken.rawValue, with: Token.forWeather)
-            .replacingOccurrences(of: UrlKey.forUnit.rawValue, with: Units.metric.rawValue)
-            .replacingOccurrences(of: UrlKey.forLang.rawValue, with: "fr")
-            
-        let url = URL(string: baseUrl + paramUrl)
-
-        guard let url = url else {
-            callback(false, nil)
+    func getWeather(forCity city: String, withUnit unit: Units = .metric, completion: @escaping (Result<WeatherModel, APIError>) -> Void) {
+        
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            completion(.failure(.url))
+            return
+        }
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: baseQueryItem.city.rawValue, value: city),
+            URLQueryItem(name: baseQueryItem.token.rawValue, value: Token.forWeather),
+            URLQueryItem(name: baseQueryItem.lang.rawValue, value: "fr"),
+            URLQueryItem(name: baseQueryItem.units.rawValue, value: unit.rawValue)
+        ]
+        
+        guard let components = urlComponents.string, let url = URL(string: components) else {
+            completion(.failure(.query))
             return
         }
         
@@ -58,26 +60,34 @@ class WeatherService {
                 guard let data = data, error == nil,
                       let response = response as? HTTPURLResponse,
                       response.statusCode == 200 else {
-                          callback(false, nil)
+                          completion(.failure(.server))
                           return
                       }
                 guard let weatherModel = try? JSONDecoder().decode(WeatherModel.self, from: data) else {
-                    callback(false, nil)
+                    completion(.failure(.decoding))
                     return
                 }
-                callback(true, weatherModel)
+                completion(.success(weatherModel))
             }
         }
         task?.resume()
     }
     
-    func getIcon(forCode code: String, callback: @escaping (Bool, UIImage?) -> Void) {
+    // MARK: - Icon call
+    
+    private let iconURL = "https://openweathermap.org/img/wn/\(iconQueryItem.forCode.rawValue)@2x.png"
+    
+    enum iconQueryItem: String {
+            case forCode = "--code--"
+        }
+    
+    func getIcon(forCode code: String, completion: @escaping (Result<UIImage, APIError>) -> Void) {
         
-        let iconUrl = iconURL.replacingOccurrences(of: UrlKey.forCode.rawValue, with: code)
+        let iconUrl = iconURL.replacingOccurrences(of: iconQueryItem.forCode.rawValue, with: code)
         let url = URL(string: iconUrl)
         
         guard let url = url else {
-            callback(false, nil)
+            completion(.failure(.url))
             return
         }
         
@@ -89,11 +99,14 @@ class WeatherService {
                 guard let data = data, error == nil,
                       let response = response as? HTTPURLResponse,
                       response.statusCode == 200 else {
-                        callback(false, nil)
+                          completion(.failure(.server))
                         return
                     }
-                let image = UIImage(data: data)
-                callback(true, image)
+                guard let image = UIImage(data: data) else {
+                    completion(.failure(.decoding))
+                    return
+                }
+                completion(.success(image))
             }
         }
         task?.resume()
