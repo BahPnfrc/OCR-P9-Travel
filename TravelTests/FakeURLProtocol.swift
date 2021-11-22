@@ -2,9 +2,11 @@ import Foundation
 import XCTest
 
 // https://www.hackingwithswift.com/articles/153/how-to-test-ios-networking-code-the-easy-way
-final class URLTestProtocol: URLProtocol {
+// https://blog.devgenius.io/unit-test-networking-code-in-swift-without-making-loads-of-mock-classes-74489d0b12a8
+final class FakeURLProtocol: URLProtocol {
     
-    static var loadingHandler: ((URLRequest) -> (HTTPURLResponse, Data?, Error?))?
+    // static var loadingHandler: ((URLRequest) -> (Data?, HTTPURLResponse, Error?))?
+    static var loadingHandler: ((URLRequest) -> (Data?, HTTPURLResponse))? // Error non requis
     
     override class func canInit(with request: URLRequest) -> Bool {
         return true
@@ -15,19 +17,19 @@ final class URLTestProtocol: URLProtocol {
     }
 
     override func startLoading() {
-        guard let handler = URLTestProtocol.loadingHandler else {
+        guard let handler = FakeURLProtocol.loadingHandler else {
             XCTFail("Loading handler is not set.")
             return
         }
         
-        let (response, data, _) = handler(request)
+        let (data, response) = handler(request)
         if let data = data {
             
-            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             client?.urlProtocol(self, didLoad: data)
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             client?.urlProtocolDidFinishLoading(self)
             
-        } else {
+        } else { // Error déduit de data == nil
             
             class URLTestProtocolError: Error {}
             let urlTestProtocolError = URLTestProtocolError()

@@ -4,24 +4,27 @@ import XCTest
 class WeatherServiceTestCase: XCTestCase {
 
     private let timeOut = 0.01
+    var fakeUrlSession: URLSession!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLProtocol.self]
+        fakeUrlSession = URLSession(configuration: configuration)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testGivenWeatherServiceIsCalled_whenResultIsSuccess_thenRequiredValuesAreNotNil() {
         // Given
-        let expectation = XCTestExpectation(description: "Queue change")
-        let weatherService = WeatherService(
-            weatherSession: URLSessionFake(
-                data: FakeWeatherResponseData.dataOK,
-                response: FakeResponseData.responseOK,
-                error: nil))
+        let weatherService = WeatherService(weatherSession: fakeUrlSession)
+        FakeURLProtocol.loadingHandler = { _ in
+            return (FakeWeatherResponseData.dataOK, FakeResponseData.responseOK)
+        }
 
         // When
+        let expectation = XCTestExpectation(description: "Queue change")
         weatherService.getWeather(forCity: "city") { result in
  
             // Then

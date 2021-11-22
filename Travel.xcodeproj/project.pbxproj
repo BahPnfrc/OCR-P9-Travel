@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52149962274C21260010FD44 /* URLTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52149961274C21260010FD44 /* URLTestProtocol.swift */; };
+		52149962274C21260010FD44 /* FakeURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52149961274C21260010FD44 /* FakeURLProtocol.swift */; };
 		521E8B8A273D8C7900A7BB0C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521E8B89273D8C7900A7BB0C /* Token.swift */; };
 		521E8B8C273EBFDB00A7BB0C /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521E8B8B273EBFDB00A7BB0C /* DoubleExtension.swift */; };
 		521E8B8E27419E5700A7BB0C /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521E8B8D27419E5700A7BB0C /* CurrencyModel.swift */; };
@@ -16,8 +16,6 @@
 		528961FA2747A70E00B5EA6D /* WeatherServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528961F92747A70E00B5EA6D /* WeatherServiceTestCase.swift */; };
 		528961FF2747AA3800B5EA6D /* Weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 528961FE2747AA3800B5EA6D /* Weather.json */; };
 		528962012747AA8700B5EA6D /* FakeWeatherResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528962002747AA8700B5EA6D /* FakeWeatherResponseData.swift */; };
-		528962032747DAAA00B5EA6D /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528962022747DAAA00B5EA6D /* URLSessionFake.swift */; };
-		528962052747DAE300B5EA6D /* URLSessionDataTaskFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528962042747DAE300B5EA6D /* URLSessionDataTaskFake.swift */; };
 		528962082747FD9900B5EA6D /* Currency.json in Resources */ = {isa = PBXBuildFile; fileRef = 528962072747FD9900B5EA6D /* Currency.json */; };
 		5289620B2747FDF200B5EA6D /* Translate.json in Resources */ = {isa = PBXBuildFile; fileRef = 5289620A2747FDF200B5EA6D /* Translate.json */; };
 		5289620D2747FE2E00B5EA6D /* FakeCurrencyResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289620C2747FE2E00B5EA6D /* FakeCurrencyResponseData.swift */; };
@@ -59,7 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		52149961274C21260010FD44 /* URLTestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTestProtocol.swift; sourceTree = "<group>"; };
+		52149961274C21260010FD44 /* FakeURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeURLProtocol.swift; sourceTree = "<group>"; };
 		521E8B89273D8C7900A7BB0C /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		521E8B8B273EBFDB00A7BB0C /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		521E8B8D27419E5700A7BB0C /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
@@ -68,8 +66,6 @@
 		528961F92747A70E00B5EA6D /* WeatherServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTestCase.swift; sourceTree = "<group>"; };
 		528961FE2747AA3800B5EA6D /* Weather.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Weather.json; sourceTree = "<group>"; };
 		528962002747AA8700B5EA6D /* FakeWeatherResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWeatherResponseData.swift; sourceTree = "<group>"; };
-		528962022747DAAA00B5EA6D /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
-		528962042747DAE300B5EA6D /* URLSessionDataTaskFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskFake.swift; sourceTree = "<group>"; };
 		528962072747FD9900B5EA6D /* Currency.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Currency.json; sourceTree = "<group>"; };
 		5289620A2747FDF200B5EA6D /* Translate.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Translate.json; sourceTree = "<group>"; };
 		5289620C2747FE2E00B5EA6D /* FakeCurrencyResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCurrencyResponseData.swift; sourceTree = "<group>"; };
@@ -186,9 +182,7 @@
 		52A1C774273AAFD200BFA463 /* TravelTests */ = {
 			isa = PBXGroup;
 			children = (
-				528962022747DAAA00B5EA6D /* URLSessionFake.swift */,
-				528962042747DAE300B5EA6D /* URLSessionDataTaskFake.swift */,
-				52149961274C21260010FD44 /* URLTestProtocol.swift */,
+				52149961274C21260010FD44 /* FakeURLProtocol.swift */,
 				5289620E2747FF2100B5EA6D /* FakeResponseData.swift */,
 				528961FB2747A71400B5EA6D /* WeatherTests */,
 				528962062747FD5700B5EA6D /* CurrencyTests */,
@@ -411,12 +405,10 @@
 			files = (
 				528962112748001500B5EA6D /* FakeTranslateResponseData.swift in Sources */,
 				528961FA2747A70E00B5EA6D /* WeatherServiceTestCase.swift in Sources */,
-				528962032747DAAA00B5EA6D /* URLSessionFake.swift in Sources */,
 				5289620D2747FE2E00B5EA6D /* FakeCurrencyResponseData.swift in Sources */,
 				5289620F2747FF2100B5EA6D /* FakeResponseData.swift in Sources */,
-				52149962274C21260010FD44 /* URLTestProtocol.swift in Sources */,
+				52149962274C21260010FD44 /* FakeURLProtocol.swift in Sources */,
 				528962012747AA8700B5EA6D /* FakeWeatherResponseData.swift in Sources */,
-				528962052747DAE300B5EA6D /* URLSessionDataTaskFake.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +584,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -620,6 +613,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
