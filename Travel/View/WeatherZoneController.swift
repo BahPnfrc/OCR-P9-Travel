@@ -27,7 +27,7 @@ class WeatherZoneController {
     }
     
     func setCity(with city: String) {
-        cityLabel.text = Label.city.rawValue + city
+        cityLabel.text = city
     }
     
     func setTemp(with temp: String) {

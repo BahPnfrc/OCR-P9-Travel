@@ -2,8 +2,8 @@ import XCTest
 import Foundation
 @testable import Travel
 
-class WeatherServiceTestCase: XCTestCase {
-
+class TranslateServiceTestCase: XCTestCase {
+    
     private let timeout = 0.01
     var fakeUrlSession: URLSession!
     
@@ -13,15 +13,15 @@ class WeatherServiceTestCase: XCTestCase {
         fakeUrlSession = URLSession(configuration: configuration)
     }
     
-    func testGivenWeatherServiceIsCalled_whenSuccess_thenRequiredValuesAreNotNil() {
+    func testGivenWeatherServiceIsCalled_whenResultIsSuccess_thenRequiredValuesAreNotNil() {
         // Given
-        let weatherService = WeatherService(weatherSession: fakeUrlSession)
+        let translateService = TranslateService(session: fakeUrlSession)
         FakeURLProtocol.loadingHandler = { _ in
-            return (FakeWeatherResponseData.dataOK, FakeResponseData.responseOK)
+            return (FakeTranslateResponseData.dataOK, FakeResponseData.responseOK)
         }
 
         let expectation = XCTestExpectation(description: "Queue change.")
-        weatherService.getWeather(forCity: "city") { result in
+        translateService.getTranslation(of: "someText", to: .english) { result in
  
             // When
             switch result {
@@ -29,15 +29,12 @@ class WeatherServiceTestCase: XCTestCase {
                 XCTFail("Found .failure where .success was expected.")
             case .success(let model):
                 // Then
-                XCTAssertNotNil(model.name)
-                XCTAssertNotNil(model.weather.description)
-                XCTAssertNotNil(model.main.temp)
-                XCTAssertNotNil(model.weather[0].weatherDescription)
-                XCTAssertNotNil(model.weather[0].icon)
+                XCTAssertNotNil(model.data.translations)
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
     }
-
+    
+    
 }

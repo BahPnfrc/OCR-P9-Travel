@@ -3,19 +3,19 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
-    @IBOutlet weak var defBackground: UIView!
+    @IBOutlet weak var defView: UIView!
     @IBOutlet weak var defCityLabel: UILabel!
     @IBOutlet weak var defTempLabel: UILabel!
     @IBOutlet weak var defWeatherLabel: UILabel!
     @IBOutlet weak var defWeatherImageView: UIImageView!
     
-    @IBOutlet weak var userBackground: UIView!
+    @IBOutlet weak var userView: UIView!
     @IBOutlet weak var userCityLabel: UILabel!
     @IBOutlet weak var userTempLabel: UILabel!
     @IBOutlet weak var userWeatherLabel: UILabel!
     @IBOutlet weak var userWeatherImageView: UIImageView!
     
-    @IBOutlet weak var ctrlBackground: UIView!
+    @IBOutlet weak var ctrlView: UIView!
     @IBOutlet weak var ctrlTextField: UITextField!
     @IBOutlet weak var ctrlButton: UIButton!
     
@@ -27,8 +27,8 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        defZone = WeatherZoneController(background: defBackground, city: defCityLabel, temp: defTempLabel, weather: defWeatherLabel, image: defWeatherImageView)
-        userZone = WeatherZoneController(background: userBackground, city: userCityLabel, temp: userTempLabel, weather: userWeatherLabel, image: userWeatherImageView)
+        defZone = WeatherZoneController(background: defView, city: defCityLabel, temp: defTempLabel, weather: defWeatherLabel, image: defWeatherImageView)
+        userZone = WeatherZoneController(background: userView, city: userCityLabel, temp: userTempLabel, weather: userWeatherLabel, image: userWeatherImageView)
         
         getWeather(forCity: defCity, withUnit: defUnit, forZone: defZone)
         
@@ -36,10 +36,16 @@ class WeatherViewController: UIViewController {
     }
     
     private func paint() {
-        defBackground.layer.cornerRadius = 10
-        userBackground.layer.cornerRadius = 10
-        ctrlBackground.layer.cornerRadius = 10
-        ctrlButton.layer.cornerRadius = 10
+        for container in [defView, userView, ctrlView ]{
+            container?.backgroundColor = Painting.defViewColor
+            container?.layer.cornerRadius = Painting.defRadius
+        }
+        ctrlButton.backgroundColor = Painting.lightBlue
+        ctrlButton.layer.cornerRadius = Painting.defRadius
+        
+        defCityLabel.textColor = Painting.cream
+        userCityLabel.textColor = Painting.cream
+        
     }
     
     @IBAction func didTapButton(_ sender: Any) {

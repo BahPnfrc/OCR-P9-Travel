@@ -1,5 +1,40 @@
 import Foundation
 
+// https://cloud.google.com/translate/docs/languages
+enum Langage: String, CaseIterable {
+    case french = "fr"
+    case english = "en"
+    case italian = "it"
+    case spanish = "es"
+    case deutsch = "de"
+    case russian = "ru"
+    case hindi = "hi"
+    case chinese = "zh"
+    case japanese = "ja"
+    case hebrew = "he"
+    case arabic = "ar"
+    
+    var data: (name: String, flag: String) {
+        switch self {
+        case .french: return ("Français", "🇫🇷")
+        case .english: return ("Anglais", "🇺🇸")
+        case .italian: return ("Italien", "🇮🇹")
+        case .spanish: return ("Espagnol", "🇪🇸")
+        case .deutsch: return ("Allemand", "🇩🇪")
+        case .russian: return ("Russe", "🇷🇺")
+        case .hindi: return ("Hindi", "🇮🇳")
+        case .chinese: return ("Chinois", "🇨🇳")
+        case .japanese: return ("Japonais", "🇯🇵")
+        case .hebrew: return ("Hébreu", "🇮🇱")
+        case .arabic: return ("Arabe", "🇸🇦")
+        }
+    }
+    
+    var toLabel: String {
+        return self.data.name + " " + self.data.flag
+    }
+}
+
 class TranslateService {
     
     static let shared = TranslateService()
@@ -21,20 +56,6 @@ class TranslateService {
         case token = "key"
         case input = "q"
         case source, target, format
-    }
-
-    // https://cloud.google.com/translate/docs/languages
-    enum Langage: String {
-        case french = "fr"
-        case english = "en"
-        case italian = "it"
-        case spanish = "es"
-        case deutsch = "de"
-        case russian = "ru"
-        case chinese = "zh"
-        case japanese = "ja"
-        case hebrew = "he"
-        case swahili = "sw"
     }
     
     // MARK: - Network Call

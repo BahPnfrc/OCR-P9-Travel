@@ -29,7 +29,7 @@ final class FakeURLProtocol: URLProtocol {
             client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             client?.urlProtocolDidFinishLoading(self)
             
-        } else { // Error déduit de data == nil
+        } else {
             
             class URLTestProtocolError: Error {}
             let urlTestProtocolError = URLTestProtocolError()

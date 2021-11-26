@@ -3,7 +3,7 @@
 import Foundation
 
 // MARK: - CurrencyModel
-struct CurrencyModel: Codable {
+struct CurrencyRateModel: Codable {
     let success: Bool
     let timestamp: Int
     let base, date: String
