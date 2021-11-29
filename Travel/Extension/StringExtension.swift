@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 extension String {
-    func image() -> UIImage? {
+    func toUIImage() -> UIImage? {
         let size = CGSize(width: 40, height: 40)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         UIColor.white.withAlphaComponent(0).set()

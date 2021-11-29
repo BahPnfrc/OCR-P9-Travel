@@ -1,40 +1,5 @@
 import Foundation
 
-// https://cloud.google.com/translate/docs/languages
-enum Langage: String, CaseIterable {
-    case french = "fr"
-    case english = "en"
-    case italian = "it"
-    case spanish = "es"
-    case deutsch = "de"
-    case russian = "ru"
-    case hindi = "hi"
-    case chinese = "zh"
-    case japanese = "ja"
-    case hebrew = "he"
-    case arabic = "ar"
-    
-    var data: (name: String, flag: String) {
-        switch self {
-        case .french: return ("Français", "🇫🇷")
-        case .english: return ("Anglais", "🇺🇸")
-        case .italian: return ("Italien", "🇮🇹")
-        case .spanish: return ("Espagnol", "🇪🇸")
-        case .deutsch: return ("Allemand", "🇩🇪")
-        case .russian: return ("Russe", "🇷🇺")
-        case .hindi: return ("Hindi", "🇮🇳")
-        case .chinese: return ("Chinois", "🇨🇳")
-        case .japanese: return ("Japonais", "🇯🇵")
-        case .hebrew: return ("Hébreu", "🇮🇱")
-        case .arabic: return ("Arabe", "🇸🇦")
-        }
-    }
-    
-    var toLabel: String {
-        return self.data.name + " " + self.data.flag
-    }
-}
-
 class TranslateService {
     
     static let shared = TranslateService()
@@ -50,9 +15,9 @@ class TranslateService {
     // MARK: - Parameters
     
     // https://cloud.google.com/translate/docs/basic/quickstart
-    let baseUrl = "https://translation.googleapis.com//language/translate/v2"
+    private let baseUrl = "https://translation.googleapis.com//language/translate/v2"
     
-    enum UrlQuery: String {
+    private enum UrlQuery: String {
         case token = "key"
         case input = "q"
         case source, target, format
@@ -60,7 +25,7 @@ class TranslateService {
     
     // MARK: - Network Call
     
-    func getTranslation(of input: String, from source: Langage = .french, to target: Langage, completion: @escaping (Result<TranslateModel, APIError>) -> Void) {
+    func getTranslation(of input: String, from source: Langage = .french, to target: Langage, completion: @escaping (Result<TranslateJson, ApiError>) -> Void) {
     
         guard var urlComponents = URLComponents(string: baseUrl) else {
             completion(.failure(.url))
@@ -91,7 +56,7 @@ class TranslateService {
                       completion(.failure(.server))
                       return
                   }
-            guard let translateModel = try? JSONDecoder().decode(TranslateModel.self, from: data) else {
+            guard let translateModel = try? JSONDecoder().decode(TranslateJson.self, from: data) else {
                 completion(.failure(.decoding))
                 return
             }

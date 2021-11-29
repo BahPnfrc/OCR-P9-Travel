@@ -1,19 +1,5 @@
 import Foundation
 
-enum Currency: String {
-    case euro = "EUR"
-    case greatBritainPound = "GBP"
-    case usDollar = "USD"
-    
-    var name: String {
-        switch self {
-        case .euro: return "Euro"
-        case .greatBritainPound: return "Pound"
-        case .usDollar: return "Dollar"
-        }
-    }
-}
-
 class CurrencyService {
     
     static let shared = CurrencyService()
@@ -32,26 +18,27 @@ class CurrencyService {
     // https://developer.apple.com/news/?id=jxky8h89
     private let baseUrl = "http://data.fixer.io/api/latest"
     
-    enum QueryItem: String {
+    private enum QueryItem: String {
         case token = "access_key"
         case currency = "from"
     }
     
     // MARK: - Network result handling
     
-    func getRate(from fromCurrency: Currency, to toCurrency: Currency, completion: @escaping (Result<CurrencyResultModel, APIError>) -> Void) {
-        getAllRates(ofCurrency: fromCurrency) { result in
+    func getRate(completion: @escaping (Result<CurrencyResult, ApiError>) -> Void) {
+        getAllRates(ofCurrency: .euro) { result in
             
+            let defaultCurrency = Currency.usDollar
             switch result {
             case .failure(let error):
                 completion(.failure(error))
                 return
             case .success(let currencyModel):
-                guard let rate = currencyModel.rates.first(where: {$0.key == toCurrency.rawValue})?.value else {
-                    completion(.failure(.other(error: "Aucune donnée sur la devise '\(toCurrency.rawValue)'")))
+                guard let rate = currencyModel.rates.first(where: {$0.key == defaultCurrency.rawValue})?.value else {
+                    completion(.failure(.other(error: "Aucune donnée pour la devise '\(defaultCurrency.rawValue)'")))
                     return
                 }
-                let result = CurrencyResultModel(from: fromCurrency, to: toCurrency, withRate: rate, fromModel: currencyModel)
+                let result = CurrencyResult(rate: rate, timeStamp: currencyModel.timestamp)
                 completion(.success(result))
                 return
             }
@@ -60,7 +47,7 @@ class CurrencyService {
     
     // MARK: - Network call
     
-    private func getAllRates(ofCurrency currency: Currency, completion: @escaping (Result<CurrencyRateModel, APIError>) -> Void) {
+    private func getAllRates(ofCurrency currency: Currency, completion: @escaping (Result<CurrencyJson, ApiError>) -> Void) {
         
         guard var urlComponents = URLComponents(string: baseUrl) else {
             completion(.failure(.url))
@@ -87,7 +74,7 @@ class CurrencyService {
                       completion(.failure(.server))
                       return
                   }
-            guard let currencyModel = try? JSONDecoder().decode(CurrencyRateModel.self, from: data) else {
+            guard let currencyModel = try? JSONDecoder().decode(CurrencyJson.self, from: data) else {
                 completion(.failure(.decoding))
                 return
             }

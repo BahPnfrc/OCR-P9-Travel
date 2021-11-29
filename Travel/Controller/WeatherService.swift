@@ -1,12 +1,6 @@
 import Foundation
 import UIKit
 
-enum Units: String {
-    case standard
-    case metric
-    case imperial
-}
-
 class WeatherService {
     
     static let shared = WeatherService()
@@ -14,26 +8,26 @@ class WeatherService {
     
     private var task: URLSessionDataTask?
     private var weatherSession = URLSession(configuration: .default)
-    private var imageSession = URLSession(configuration: .default)
+    private var iconSession = URLSession(configuration: .default)
     
     init(weatherSession: URLSession){
         self.weatherSession = weatherSession
     }
-    init(imageSession: URLSession){
-        self.imageSession = imageSession
+    init(iconSession: URLSession){
+        self.iconSession = iconSession
     }
     
     // MARK: - Weather call
     
     private let baseURL = "https://api.openweathermap.org/data/2.5/weather"
 
-    enum baseQueryItem: String {
+    private enum baseQueryItem: String {
         case city = "q"
         case token = "appid"
         case lang, units
     }
     
-    func getWeather(forCity city: String, withUnit unit: Units = .metric, completion: @escaping (Result<WeatherModel, APIError>) -> Void) {
+    func getWeather(forCity city: String, withUnit unit: Units = .metric, completion: @escaping (Result<WeatherJson, ApiError>) -> Void) {
         
         guard var urlComponents = URLComponents(string: baseURL) else {
             completion(.failure(.url))
@@ -63,7 +57,7 @@ class WeatherService {
                           completion(.failure(.server))
                           return
                       }
-                guard let weatherModel = try? JSONDecoder().decode(WeatherModel.self, from: data) else {
+                guard let weatherModel = try? JSONDecoder().decode(WeatherJson.self, from: data) else {
                     completion(.failure(.decoding))
                     return
                 }
@@ -77,11 +71,11 @@ class WeatherService {
     
     private let iconURL = "https://openweathermap.org/img/wn/\(iconQueryItem.forCode.rawValue)@2x.png"
     
-    enum iconQueryItem: String {
+    private enum iconQueryItem: String {
             case forCode = "--code--"
         }
     
-    func getIcon(forCode code: String, completion: @escaping (Result<UIImage, APIError>) -> Void) {
+    func getIcon(forCode code: String, completion: @escaping (Result<UIImage, ApiError>) -> Void) {
         
         let iconUrl = iconURL.replacingOccurrences(of: iconQueryItem.forCode.rawValue, with: code)
         let url = URL(string: iconUrl)
@@ -94,7 +88,7 @@ class WeatherService {
         let urlRequest = URLRequest(url: url)
         
         task?.cancel()
-        task = imageSession.dataTask(with: urlRequest) { (data, response, error) in
+        task = iconSession.dataTask(with: urlRequest) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil,
                       let response = response as? HTTPURLResponse,

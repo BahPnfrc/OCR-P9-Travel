@@ -4,7 +4,7 @@ import Foundation
 
 class TranslateServiceTestCase: XCTestCase {
     
-    private let timeout = 0.01
+    private let timeout = 0.1
     var fakeUrlSession: URLSession!
     
     override func setUpWithError() throws {
@@ -29,7 +29,7 @@ class TranslateServiceTestCase: XCTestCase {
                 XCTFail("Found .failure where .success was expected.")
             case .success(let model):
                 // Then
-                XCTAssertNotNil(model.data.translations)
+                XCTAssertNotNil(model.data.translations[0].translatedText)
             }
             expectation.fulfill()
         }

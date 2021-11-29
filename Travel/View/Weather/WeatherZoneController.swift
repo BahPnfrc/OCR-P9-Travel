@@ -3,6 +3,12 @@ import UIKit
 
 class WeatherZoneController {
     
+    enum Position {
+        case top, sub
+    }
+    
+    let position: Position
+    
     private weak var backgroundView: UIView!
     private weak var cityLabel: UILabel!
     private weak var tempLabel: UILabel!
@@ -10,12 +16,13 @@ class WeatherZoneController {
     private weak var weatherImageView: UIImageView!
     
     private enum Label: String {
-        case city = "Ville : "
+        case city = "Ville"
         case temp = "Température : "
         case weather = "Temps : "
     }
     
-    init(background: UIView, city: UILabel, temp: UILabel, weather: UILabel, image: UIImageView) {
+    init(position: Position, background: UIView, city: UILabel, temp: UILabel, weather: UILabel, image: UIImageView) {
+        self.position = position
         self.backgroundView = background
         self.cityLabel = city
         self.tempLabel = temp

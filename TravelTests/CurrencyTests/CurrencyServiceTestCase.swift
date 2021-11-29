@@ -4,7 +4,7 @@ import Foundation
 
 class CurrencyServiceTestCase: XCTestCase {
     
-    private let timeout = 0.01
+    private let timeout = 0.1
     var fakeUrlSession: URLSession!
     
     override func setUpWithError() throws {
@@ -21,18 +21,19 @@ class CurrencyServiceTestCase: XCTestCase {
         }
 
         let expectation = XCTestExpectation(description: "Queue change.")
-        currencyService.getConversion(of: 1, from: .euro, to: .usDollar) { result in
- 
+        currencyService.getRate(completion: { result in
             // When
             switch result {
             case .failure(_):
                 XCTFail("Found .failure where .success was expected.")
-            case .success(_):
+            case .success(let result):
                 // Then
-                XCTAssertTrue(true)
+                XCTAssertNotNil(result.timeStamp)
+                XCTAssertNotNil(result.dollarToEuroRate)
+                XCTAssertNotNil(result.euroToDollarRate)
             }
             expectation.fulfill()
-        }
+        })
         wait(for: [expectation], timeout: timeout)
     }
 

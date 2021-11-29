@@ -1,12 +1,9 @@
 import Foundation
 import XCTest
 
-// https://www.hackingwithswift.com/articles/153/how-to-test-ios-networking-code-the-easy-way
-// https://blog.devgenius.io/unit-test-networking-code-in-swift-without-making-loads-of-mock-classes-74489d0b12a8
 final class FakeURLProtocol: URLProtocol {
     
-    // static var loadingHandler: ((URLRequest) -> (Data?, HTTPURLResponse, Error?))?
-    static var loadingHandler: ((URLRequest) -> (Data?, HTTPURLResponse))? // Error non requis
+    static var loadingHandler: ((URLRequest) -> (Data?, HTTPURLResponse))?
     
     override class func canInit(with request: URLRequest) -> Bool {
         return true

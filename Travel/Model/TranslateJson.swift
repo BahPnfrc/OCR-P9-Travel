@@ -1,9 +1,6 @@
-//   let translateModel = try? newJSONDecoder().decode(TranslateModel.self, from: jsonData)
-
 import Foundation
 
-// MARK: - TranslateModel
-struct TranslateModel: Codable {
+struct TranslateJson: Codable {
     let data: DataClass
     
     // MARK: - DataClass

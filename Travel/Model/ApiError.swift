@@ -1,6 +1,6 @@
 import Foundation
 
-enum APIError: Error {
+enum ApiError: Error {
     case url
     case query
     case server

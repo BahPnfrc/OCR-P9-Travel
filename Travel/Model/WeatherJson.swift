@@ -1,9 +1,6 @@
-//   let weatherModel = try? newJSONDecoder().decode(WeatherModel.self, from: jsonData)
-
 import Foundation
 
-// MARK: - WeatherModel
-struct WeatherModel: Codable {
+struct WeatherJson: Codable {
     let name: String
     let cod: Int
     
