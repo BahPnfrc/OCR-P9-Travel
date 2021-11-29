@@ -42,9 +42,7 @@ class CurrencyViewController: UIViewController {
     var topZoneController: CurrencyZoneController!
     var subZoneController: CurrencyZoneController!
     var switchController: CurrencySwitchController!
-    
     var currentCurrency: Currency = .usDollar
-    var currentRate: CurrencyJson?
     
     // MARK: - Init
     
@@ -64,9 +62,17 @@ class CurrencyViewController: UIViewController {
             topZone: topZoneController,
             subZone: subZoneController)
         
-        displayResult(ofAmount: 1.0, from: switchController.fromZone.currency, to: switchController.toZone.currency)
+        displayResult(
+            ofAmount: 1.0,
+            from: switchController.fromZone.currency,
+            to: switchController.toZone.currency)
        
         paint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fromTextField.becomeFirstResponder()
     }
     
     private func paint() {
@@ -88,6 +94,7 @@ class CurrencyViewController: UIViewController {
     @IBAction func didTapButton(_ sender: Any) {
         guard let text = fromTextField.text, let amount = Double(text) else {
             fromTextField.text = nil
+            fromTextField.becomeFirstResponder()
             return
         }
         let from = switchController.fromZone.currency

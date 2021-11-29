@@ -2,7 +2,8 @@ import Foundation
 import UIKit
 
 extension String {
-    func toUIImage() -> UIImage? {
+    
+    func toImage() -> UIImage? {
         let size = CGSize(width: 40, height: 40)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         UIColor.white.withAlphaComponent(0).set()
@@ -21,4 +22,5 @@ extension String {
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
+    
 }

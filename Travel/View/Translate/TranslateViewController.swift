@@ -6,7 +6,7 @@ class TranslateViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var topFlagImageView: UIImageView!
     @IBOutlet weak var topLangButton: UIButton!
     @IBOutlet weak var topTextView: UITextView!
     @IBOutlet weak var topDeleteImageView: UIImageView!
@@ -14,7 +14,7 @@ class TranslateViewController: UIViewController {
     @IBOutlet weak var orderImageView: UIImageView!
     
     @IBOutlet weak var subView: UIView!
-    @IBOutlet weak var subLabel: UILabel!
+    @IBOutlet weak var subFlagImageView: UIImageView!
     @IBOutlet weak var subLangButton: UIButton!
     @IBOutlet weak var subTextView: UITextView!
     @IBOutlet weak var subDeleteImageView: UIImageView!
@@ -31,12 +31,14 @@ class TranslateViewController: UIViewController {
     
     // MARK: - Properties
 
-    var topZoneController: TranslateZoneController!
-    var subZoneController: TranslateZoneController!
-    var switchController: TranslateSwitchController!
+    private var topZoneController: TranslateZoneController!
+    private var subZoneController: TranslateZoneController!
+    private var switchController: TranslateSwitchController!
     
     private let defaultTopLang = Langage.french
     private let defaultSubLang = Langage.english
+    
+    private var showFlag = true
     
     // MARK: - Init
 
@@ -45,15 +47,15 @@ class TranslateViewController: UIViewController {
         topZoneController = TranslateZoneController(
             position: .top,
             lang: defaultTopLang,
-            label: topLabel,
+            flag: topFlagImageView,
             textView: topTextView)
         subZoneController = TranslateZoneController(
             position: .sub,
             lang: defaultSubLang,
-            label: subLabel,
+            flag: subFlagImageView,
             textView: subTextView)
-        topLabel.text = topZoneController.langage.data.flag
-        subLabel.text = subZoneController.langage.data.flag
+        topFlagImageView.image = topZoneController.langage.data.flag.toImage()
+        subFlagImageView.image = subZoneController.langage.data.flag.toImage()
         
         switchController = TranslateSwitchController(
             isSwitchedOn: ctrlSwitch.isOn,
@@ -63,6 +65,11 @@ class TranslateViewController: UIViewController {
         paint()
         loadMenu()
         canPerformTranslation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        topTextView.becomeFirstResponder()
     }
     
     private func paint() {
@@ -77,11 +84,15 @@ class TranslateViewController: UIViewController {
         }
         topTextView.layer.cornerRadius = Painting.defRadius
         subTextView.layer.cornerRadius = Painting.defRadius
+        if !showFlag {
+            topFlagImageView.isHidden = true
+            subFlagImageView.isHidden = true
+        }
     }
     
     private func loadMenu(){
-        let topChildrens = createMenu(forZone: topZoneController, withTopLangage: .english)
-        let subChildrens = createMenu(forZone: subZoneController, withTopLangage: .french)
+        let topChildrens = createMenu(forZone: topZoneController)
+        let subChildrens = createMenu(forZone: subZoneController)
         
         let topMenu = UIMenu(title: "Choisir une langue", options: .displayInline, children: topChildrens)
         let subMenu = UIMenu(title: "Choisir une langue", options: .displayInline, children: subChildrens)
@@ -122,7 +133,6 @@ class TranslateViewController: UIViewController {
         copyText(from: subTextView, rotating: subCopyImageView)
     }
     
-    
     @IBAction func didTapSwitch(_ sender: Any) {
         performSwitch()
     }
@@ -149,12 +159,11 @@ class TranslateViewController: UIViewController {
                 image.transform = CGAffineTransform.identity
             })
         })
-        
     }
     
     // MARK: - Functions
     
-    private func createMenu(forZone zone: TranslateZoneController, withTopLangage first: Langage) -> [UIAction] {
+    private func createMenu(forZone zone: TranslateZoneController) -> [UIAction] {
         var children = [UIAction]()
         switch zone.position {
         case .top:
@@ -173,7 +182,7 @@ class TranslateViewController: UIViewController {
     }
     
     private func newMenuAction(forZone zone: TranslateZoneController, withLangage langage: Langage) -> UIAction {
-        return UIAction(title: langage.data.name, image: langage.data.flag.toUIImage()) { (_) in
+        return UIAction(title: langage.data.name, image: langage.data.flag.toImage()) { _ in
             zone.langage = langage
             self.canPerformTranslation()
         }

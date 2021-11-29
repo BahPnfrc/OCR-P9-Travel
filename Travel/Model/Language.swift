@@ -3,6 +3,7 @@ import Foundation
 // https://cloud.google.com/translate/docs/languages
 
 enum Langage: String, CaseIterable {
+    
     case french = "fr"
     case english = "en"
     case italian = "it"

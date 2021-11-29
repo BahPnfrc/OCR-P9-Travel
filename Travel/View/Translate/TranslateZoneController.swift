@@ -9,18 +9,18 @@ class TranslateZoneController {
     
     var langage: Langage {
         didSet {
-            label.text = langage.data.flag
+            flag.image = langage.data.flag.toImage()
         }
     }
     
     private(set) var position: Position
-    private weak var label: UILabel!
+    private weak var flag: UIImageView!
     private weak var textView: UITextView!
     
-    init(position: Position, lang: Langage, label: UILabel, textView: UITextView) {
+    init(position: Position, lang: Langage, flag: UIImageView, textView: UITextView) {
         self.position = position
         self.langage = lang
-        self.label = label
+        self.flag = flag
         self.textView = textView
     }
     

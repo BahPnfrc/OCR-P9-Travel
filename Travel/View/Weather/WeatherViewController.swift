@@ -30,7 +30,7 @@ class WeatherViewController: UIViewController {
     // MARK: - Properties
     
     var useNativeIcon = true
-    var initPositionWasUsed = false
+    var isAtInitialPosition = false
     
     let defCity = "New York"
     var defUnit: Units = .metric
@@ -42,12 +42,31 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        defZone = WeatherZoneController(position: .top, background: defView, city: defCityLabel, country: defCountryLabel, temp: defTempLabel, weather: defWeatherLabel, image: defWeatherImageView)
-        userZone = WeatherZoneController(position: .sub, background: userView, city: userCityLabel, country: userCountryLabel, temp: userTempLabel, weather: userWeatherLabel, image: userWeatherImageView)
+        defZone = WeatherZoneController(
+            position: .top,
+            background: defView,
+            city: defCityLabel,
+            country: defCountryLabel,
+            temp: defTempLabel,
+            weather: defWeatherLabel,
+            image: defWeatherImageView)
+        userZone = WeatherZoneController(
+            position: .sub,
+            background: userView,
+            city: userCityLabel,
+            country: userCountryLabel,
+            temp: userTempLabel,
+            weather: userWeatherLabel,
+            image: userWeatherImageView)
         
         displayWeather(forCity: defCity, withUnit: defUnit, forZone: defZone)
-        initPosition()
+        initialPosition()
         paint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ctrlTextField.becomeFirstResponder()
     }
     
     private func paint() {
@@ -59,15 +78,14 @@ class WeatherViewController: UIViewController {
         activityView.hidesWhenStopped = true
     }
     
-    private func initPosition() {
-        
+    private func initialPosition() {
         guard let userViewPosition = userView.superview?.convert(userView.frame.origin, to: nil),
-              let ctrlViewPosition = ctrlView.superview?.convert(ctrlView.frame.origin, to: nil) else {
-                  return
-              }
+              let ctrlViewPosition = ctrlView.superview?.convert(ctrlView.frame.origin, to: nil)
+        else { return }
         
         self.userView.isHidden = true
-        self.initPositionWasUsed = true
+        self.isAtInitialPosition = true
+        
         let yMotion = abs(userViewPosition.y - ctrlViewPosition.y)
         UIView.animate(withDuration: 0.0, animations: {
             self.ctrlView.transform = CGAffineTransform.init(translationX: 0, y: 0 - yMotion)
@@ -77,7 +95,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func restorePosition() {
-        guard initPositionWasUsed else { return }
+        guard isAtInitialPosition else { return }
         UIView.animate(withDuration: 0.5, animations: {
             self.ctrlView.transform = CGAffineTransform.identity
             self.ctrlClearButton.transform = CGAffineTransform.identity
@@ -85,15 +103,13 @@ class WeatherViewController: UIViewController {
         }, completion: { _ in
             self.userView.isHidden = false
         })
-        
     }
     
     // MARK: - Actions
     
     @IBAction func didTapButton(_ sender: Any) {
-        guard let city = ctrlTextField.text?.trimmingCharacters(in: .whitespaces), city.count > 0 else {
-            return
-        }
+        guard let city = ctrlTextField.text?.trimmingCharacters(in: .whitespaces),
+              city.count > 0 else { return }
         displayWeather(forCity: city, withUnit: defUnit, forZone: userZone)
     }
     
@@ -106,6 +122,8 @@ class WeatherViewController: UIViewController {
     // Empty
     
     // MARK: - Functions
+    
+    // MARK: Weather function
     
     private func displayWeather(forCity: String, withUnit: Units, forZone zone: WeatherZoneController) {
         
@@ -136,25 +154,32 @@ class WeatherViewController: UIViewController {
                     zone.setTemp(with: data.temp)
                     zone.setWeather(with: data.weather)
                     
-                    guard !weatherModel.weather.isEmpty else { return }
-                    let code = weatherModel.weather[0].icon
-                    
-                    switch self.useNativeIcon {
-                    case true:
-                        let codeRawValue = "icon\(code.prefix(2))"
-                        let iconCode = IconCode(rawValue: codeRawValue)
-                        if let image = iconCode?.getNativeImage {
-                            zone.setImage(with: image)
-                        } else { fallthrough }
-                    default:
-                        self.displayWeatherImage(forCode: code, forZone: zone)
-                    }
+                    self.displayImage(fromModel: weatherModel, toZone: zone)
                 }
             }
         }
     }
     
-    private func displayWeatherImage(forCode code: String, forZone zone: WeatherZoneController) {
+    // MARK: Image functions
+    
+    private func displayImage(fromModel weatherModel: WeatherJson, toZone zone: WeatherZoneController) {
+        
+        guard !weatherModel.weather.isEmpty else { return }
+        let code = weatherModel.weather[0].icon
+        
+        switch self.useNativeIcon {
+        case true:
+            let codeRawValue = "icon\(code.prefix(2))"
+            let iconCode = IconCode(rawValue: codeRawValue)
+            if let image = iconCode?.getNativeImage {
+                zone.setImage(with: image)
+            } else { fallthrough }
+        default:
+            self.getDistantImage(forCode: code, forZone: zone)
+        }
+    }
+    
+    private func getDistantImage(forCode code: String, forZone zone: WeatherZoneController) {
         WeatherService.shared.getIcon(forCode: code) { result in
             DispatchQueue.main.async {
                 switch result {
@@ -174,7 +199,6 @@ class WeatherViewController: UIViewController {
     
 }
 
-
 extension WeatherViewController {
     
     enum IconCode: String {
@@ -183,7 +207,7 @@ extension WeatherViewController {
         case icon13
         case icon50
         
-        var image: String {
+        var systemImage: String {
             switch self {
             case .icon01: return "sun.max" // clear sky
             case .icon02: return "cloud.sun" // few clouds
@@ -199,7 +223,7 @@ extension WeatherViewController {
         
         var getNativeImage: UIImage? {
             let config = UIImage.SymbolConfiguration(paletteColors: [.black, .black, .black])
-            let image = UIImage(systemName: self.image)
+            let image = UIImage(systemName: self.systemImage)
             return image?.applyingSymbolConfiguration(config)
         }
     }
