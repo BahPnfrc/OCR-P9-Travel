@@ -3,7 +3,7 @@ import UIKit
 
 class Shared {
     
-    static var defaultShowErrorMessage = "Un appel réseau n'a pas abouti.\nMerci de réessayer plus tard."
+    static var defaultShowErrorMessage = "L'opération demandée a échoué. Vérifiez ou différez la demande."
     
     static func startAnimation(of spinner: UIActivityIndicatorView?, locking button: UIButton?) {
         guard let spinner = spinner, let button = button else { return }

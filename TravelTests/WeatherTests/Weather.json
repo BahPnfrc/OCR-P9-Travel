@@ -1,43 +1,44 @@
 {
     "coord": {
-        "lon": 2.3488,
-        "lat": 48.8534
+        "lon": -74.006,
+        "lat": 40.7143
     },
     "weather": [
         {
-            "id": 804,
-            "main": "Clouds",
-            "description": "couvert",
-            "icon": "04d"
+            "id": 800,
+            "main": "Clear",
+            "description": "ciel dégagé",
+            "icon": "01d"
         }
     ],
     "base": "stations",
     "main": {
-        "temp": 281.6,
-        "feels_like": 281.6,
-        "temp_min": 279.57,
-        "temp_max": 283.27,
-        "pressure": 1033,
-        "humidity": 93
+        "temp": 275.58,
+        "feels_like": 271.24,
+        "temp_min": 275.58,
+        "temp_max": 275.58,
+        "pressure": 1012,
+        "humidity": 65,
+        "sea_level": 1012,
+        "grnd_level": 1011
     },
     "visibility": 10000,
     "wind": {
-        "speed": 1.03,
-        "deg": 0
+        "speed": 5.06,
+        "deg": 319,
+        "gust": 9.39
     },
     "clouds": {
-        "all": 90
+        "all": 6
     },
-    "dt": 1637314873,
+    "dt": 1638191173,
     "sys": {
-        "type": 2,
-        "id": 2041230,
-        "country": "FR",
-        "sunrise": 1637305560,
-        "sunset": 1637337981
+        "country": "US",
+        "sunrise": 1638187146,
+        "sunset": 1638221411
     },
-    "timezone": 3600,
-    "id": 2988507,
-    "name": "Paris",
+    "timezone": -18000,
+    "id": 5128581,
+    "name": "New York",
     "cod": 200
 }

@@ -30,7 +30,14 @@ struct WeatherJson: Codable {
         }
     }
     
+    // MARK: - Sys
+    struct Sys: Codable {
+        let country: String
+        let sunrise, sunset: Int
+    }
+    
     let weather: [Weather]
     let main: Main
+    let sys: Sys
 
 }
