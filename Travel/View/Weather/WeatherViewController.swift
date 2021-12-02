@@ -147,7 +147,7 @@ class WeatherViewController: UIViewController {
                         self.restorePosition()
                     }
                     
-                    let data: (city: String, country: String, temp: String, weather: String) = (weatherModel.name, weatherModel.sys.country, weatherModel.main.temp.toString(), weatherModel.weather[0].weatherDescription)
+                    let data: (city: String, country: String, temp: String, weather: String) = (weatherModel.name, weatherModel.sys.country, weatherModel.main.temp.toString(1), weatherModel.weather[0].weatherDescription)
                     
                     zone.setCity(with: data.city)
                     zone.setCountry(with: data.country)

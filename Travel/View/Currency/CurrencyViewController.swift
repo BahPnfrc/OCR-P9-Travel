@@ -43,6 +43,7 @@ class CurrencyViewController: UIViewController {
     var subZoneController: CurrencyZoneController!
     var switchController: CurrencySwitchController!
     var currentCurrency: Currency = .usDollar
+    var lastSearchResult: CurrencyResult?
     
     // MARK: - Init
     
@@ -62,10 +63,29 @@ class CurrencyViewController: UIViewController {
             topZone: topZoneController,
             subZone: subZoneController)
         
-        displayResult(
-            ofAmount: 1.0,
-            from: switchController.fromZone.currency,
-            to: switchController.toZone.currency)
+        CurrencyLegacy.printAll()
+        
+        if let euroToDollar = CurrencyLegacy.euroToDollarRate,
+           let dollarToEuro = CurrencyLegacy.dollarToEuroRate,
+           let timeStamp = CurrencyLegacy.timeStamp {
+            
+            print("🟣 Currency from UserDefault.")
+            let userDefault = CurrencyResult(
+                euroToDollar: euroToDollar,
+                dollarToEuro: dollarToEuro,
+                timeStamp: timeStamp)
+            lastSearchResult = userDefault
+            
+            rateValueLabel.text = ctrlSwitch.isOn ?
+            userDefault.dollarToEuroRate.toString(6) :
+            userDefault.euroToDollarRate.toString(6)
+            timeStampValueLabel.text = timeStamp
+        } else {
+            displayResult(
+                ofAmount: 1.0,
+                from: switchController.fromZone.currency,
+                to: switchController.toZone.currency)
+        }
        
         paint()
     }
@@ -92,11 +112,15 @@ class CurrencyViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func didTapButton(_ sender: Any) {
-        guard let text = fromTextField.text, let amount = Double(text) else {
+        guard let text = fromTextField.text?
+                .trimmingCharacters(in: .whitespaces)
+                .replacingOccurrences(of: ",", with: "."),
+              let amount = Double(text) else {
             fromTextField.text = nil
             fromTextField.becomeFirstResponder()
             return
         }
+        fromTextField.text = text
         let from = switchController.fromZone.currency
         let to = switchController.toZone.currency
         displayResult(ofAmount: amount, from: from, to: to)
@@ -139,6 +163,9 @@ class CurrencyViewController: UIViewController {
                     case .success(let result):
                         print("🟢 Currency service OK.")
                         
+                        self.lastSearchResult = result
+                        CurrencyLegacy.saveLastResult(result: result)
+                        
                         self.rateValueLabel.text = "\(result.euroToDollarRate)"
                         self.timeStampValueLabel.text = result.timeStamp
                         
@@ -149,7 +176,7 @@ class CurrencyViewController: UIViewController {
                         self.switchController.toZone.headerLabel.text = to.rawValue
                         self.switchController.toZone.textLabel.text = to.name
                         
-                        self.fromTextField.text = amount.toString()
+                        self.fromTextField.text = amount.toString(2)
                         self.switchController.fromZone.headerLabel.text = from.rawValue
                         self.switchController.fromZone.textLabel.text = from.name
                     }
@@ -162,17 +189,18 @@ class CurrencyViewController: UIViewController {
         if ctrlSwitch.isOn {
             let yMotion = abs(mainMoneyStack.frame.origin.y - secondMoneyStack.frame.origin.y)
             UIView.animate(withDuration: 0.5, animations: {
-                self.orderImageView.transform = CGAffineTransform(rotationAngle: .pi)
                 self.mainMoneyStack.transform = CGAffineTransform(translationX: 0, y: yMotion)
                 self.secondMoneyStack.transform = CGAffineTransform(translationX: 0, y: 0 - yMotion)
+                self.rateValueLabel.text = self.lastSearchResult?.dollarToEuroRate.toString(6)
             })
         } else {
             UIView.animate(withDuration: 0.5, animations: {
-                self.orderImageView.transform = CGAffineTransform.identity
                 self.mainMoneyStack.transform = CGAffineTransform.identity
                 self.secondMoneyStack.transform = CGAffineTransform.identity
+                self.rateValueLabel.text = self.lastSearchResult?.euroToDollarRate.toString(6)
             })
         }
+        (fromTextField.text, toMainLabel.text) = (toMainLabel.text, fromTextField.text)
         switchController.switchZones()
     }
 }

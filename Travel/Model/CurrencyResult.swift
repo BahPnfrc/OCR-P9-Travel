@@ -6,7 +6,6 @@ class CurrencyResult {
     let timeStamp: String
     
     init(rate: Double, timeStamp: Int) {
-
         self.euroToDollarRate = rate
         self.dollarToEuroRate = 1 / rate
         
@@ -14,6 +13,12 @@ class CurrencyResult {
         let format = DateFormatter()
         format.dateFormat = "dd/MM/yyyy HH:mm:ss"
         self.timeStamp = format.string(from: date)
+    }
+    
+    init(euroToDollar: Double, dollarToEuro: Double, timeStamp: String) {
+        self.euroToDollarRate = euroToDollar
+        self.dollarToEuroRate = dollarToEuro
+        self.timeStamp = timeStamp
     }
     
     func getEuroToDollar(amount: Double) -> Double {

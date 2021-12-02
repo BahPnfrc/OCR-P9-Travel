@@ -485,7 +485,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="YIa-lH-RbQ">
                                         <rect key="frame" x="20" y="20" width="314" height="37.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E80-Wn-fEg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E80-Wn-fEg">
                                                 <rect key="frame" x="0.0" y="0.0" width="254" height="37.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -590,7 +590,7 @@
                                     <constraint firstAttribute="width" secondItem="zpS-7p-A3F" secondAttribute="height" multiplier="1:1" id="8XI-c8-vFJ"/>
                                     <constraint firstAttribute="width" constant="50" id="Xg8-p4-TuA"/>
                                 </constraints>
-                                <imageReference key="image" image="arrow.up.arrow.down.circle.fill" catalog="system" renderingMode="hierarchical">
+                                <imageReference key="image" image="arrow.up.circle.fill" catalog="system" renderingMode="hierarchical">
                                     <hierarchicalColors>
                                         <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color systemColor="systemOrangeColor"/>
@@ -1200,7 +1200,7 @@
     <resources>
         <image name="AppBackground" width="1125" height="2436"/>
         <image name="arrow.down.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="arrow.up.arrow.down.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="arrow.up.circle.fill" catalog="system" width="128" height="121"/>
         <image name="character.bubble.fill.ja" catalog="system" width="128" height="110"/>
         <image name="cloud.sun.fill" catalog="system" width="128" height="95"/>
         <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
