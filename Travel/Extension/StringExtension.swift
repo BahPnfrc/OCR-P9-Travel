@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 extension String {
-    
+
     func toImage() -> UIImage? {
         let size = CGSize(width: 40, height: 40)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -14,13 +14,13 @@ extension String {
         UIGraphicsEndImageContext()
         return image
     }
-    
+
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
-    
+
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
-    
+
 }

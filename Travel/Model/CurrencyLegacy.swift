@@ -7,7 +7,7 @@ class CurrencyLegacy {
         static let dollarToEuroRate = "dollarToEuroRate"
         static let timeStamp = "timeStamp"
     }
-    
+
     static var euroToDollarRate: Double? {
         get { UserDefaults.standard.double(forKey: Keys.euroToDollarRate) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.euroToDollarRate) }
@@ -20,13 +20,13 @@ class CurrencyLegacy {
         get { UserDefaults.standard.string(forKey: Keys.timeStamp) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.timeStamp) }
     }
-    
+
     static func saveLastResult(result: CurrencyResult) {
         CurrencyLegacy.dollarToEuroRate = result.dollarToEuroRate
         CurrencyLegacy.euroToDollarRate = result.euroToDollarRate
         CurrencyLegacy.timeStamp = result.timeStamp
     }
-    
+
     static func printAll() {
         print("🟣 Legacy euroToDollarRate : ", euroToDollarRate ?? "nil")
         print("🟣 Legacy dollarToEuroRate : ", dollarToEuroRate ?? "nil")

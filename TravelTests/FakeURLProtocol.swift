@@ -2,9 +2,9 @@ import Foundation
 import XCTest
 
 final class FakeURLProtocol: URLProtocol {
-    
+
     static var loadingHandler: ((URLRequest) -> (Data?, HTTPURLResponse))?
-    
+
     override class func canInit(with request: URLRequest) -> Bool {
         return true
     }
@@ -18,16 +18,16 @@ final class FakeURLProtocol: URLProtocol {
             XCTFail("Loading handler is not set.")
             return
         }
-        
+
         let (data, response) = handler(request)
         if let data = data {
-            
+
             client?.urlProtocol(self, didLoad: data)
             client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             client?.urlProtocolDidFinishLoading(self)
-            
+
         } else {
-            
+
             class URLTestProtocolError: Error {}
             let urlTestProtocolError = URLTestProtocolError()
             client?.urlProtocol(self, didFailWithError: urlTestProtocolError)
@@ -35,5 +35,5 @@ final class FakeURLProtocol: URLProtocol {
     }
 
     override func stopLoading() {}
-    
+
 }

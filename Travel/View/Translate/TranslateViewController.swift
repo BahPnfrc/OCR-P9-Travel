@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class TranslateViewController: UIViewController {
-    
+
     // MARK: - Outlets
     
     @IBOutlet weak var topView: UIView!
@@ -10,7 +10,7 @@ class TranslateViewController: UIViewController {
     @IBOutlet weak var topLangButton: UIButton!
     @IBOutlet weak var topTextView: UITextView!
     @IBOutlet weak var topDeleteImageView: UIImageView!
-    
+
     @IBOutlet weak var orderImageView: UIImageView!
     
     @IBOutlet weak var subView: UIView!
@@ -18,15 +18,15 @@ class TranslateViewController: UIViewController {
     @IBOutlet weak var subLangButton: UIButton!
     @IBOutlet weak var subTextView: UITextView!
     @IBOutlet weak var subDeleteImageView: UIImageView!
-    
+
     @IBOutlet weak var ctrlView: UIView!
     @IBOutlet weak var ctrlButton: UIButton!
     @IBOutlet weak var ctrlLabel: UILabel!
     @IBOutlet weak var ctrlSwitch: UISwitch!
-    
+
     @IBOutlet weak var topCopyImageView: UIImageView!
     @IBOutlet weak var subCopyImageView: UIImageView!
-    
+
     @IBOutlet weak var activityView: UIActivityIndicatorView!
     
     // MARK: - Properties
@@ -34,12 +34,12 @@ class TranslateViewController: UIViewController {
     private var topZoneController: TranslateZoneController!
     private var subZoneController: TranslateZoneController!
     private var switchController: TranslateSwitchController!
-    
+
     private let defaultTopLang = Langage.french
     private let defaultSubLang = Langage.english
-    
+
     private var showFlag = true
-    
+
     // MARK: - Init
 
     override func viewDidLoad() {
@@ -56,12 +56,12 @@ class TranslateViewController: UIViewController {
             textView: subTextView)
         topFlagImageView.image = topZoneController.langage.data.flag.toImage()
         subFlagImageView.image = subZoneController.langage.data.flag.toImage()
-        
+
         switchController = TranslateSwitchController(
             isSwitchedOn: ctrlSwitch.isOn,
             topZone: topZoneController,
             subZone: subZoneController)
-        
+
         paint()
         loadMenu()
         canPerformTranslation()
@@ -71,7 +71,7 @@ class TranslateViewController: UIViewController {
         super.viewWillAppear(animated)
         topTextView.becomeFirstResponder()
     }
-    
+
     private func paint() {
         activityView.hidesWhenStopped = true
         for view in [topView, subView, ctrlView] {
@@ -89,14 +89,14 @@ class TranslateViewController: UIViewController {
             subFlagImageView.isHidden = true
         }
     }
-    
-    private func loadMenu(){
+
+    private func loadMenu() {
         let topChildrens = createMenu(forZone: topZoneController)
         let subChildrens = createMenu(forZone: subZoneController)
-        
+
         let topMenu = UIMenu(title: "Choisir une langue", options: .displayInline, children: topChildrens)
         let subMenu = UIMenu(title: "Choisir une langue", options: .displayInline, children: subChildrens)
-        
+
         if #available(iOS 14.0, *) {
             topLangButton.menu = topMenu
             topLangButton.isContextMenuInteractionEnabled = true
@@ -106,39 +106,39 @@ class TranslateViewController: UIViewController {
             // TODO: Fallback on earlier versions
         }
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func didTapButton(_ sender: Any) {
         let text = switchController.fromZone.getText().trimmingCharacters(in: .whitespaces)
         guard text.count > 0 else { return }
-        let from = switchController.fromZone.langage
-        let to = switchController.toZone.langage
-        displayTranslation(text: text, from: from, to: to)
+        let fromLangage = switchController.fromZone.langage
+        let toLangage = switchController.toZone.langage
+        displayTranslation(text: text, fromLangage, toLangage)
     }
-    
+
     @IBAction func didTapTopClearTextButton(_ sender: Any) {
         Shared.clearText(of: topTextView, rotating: topDeleteImageView)
     }
-    
+
     @IBAction func didTapSubClearTextButton(_ sender: Any) {
         Shared.clearText(of: subTextView, rotating: subDeleteImageView)
     }
-    
+
     @IBAction func didTapTopCopyButton(_ sender: Any) {
         copyText(from: topTextView, rotating: topCopyImageView)
     }
-    
+
     @IBAction func didTapSubCopyButton(_ sender: Any) {
         copyText(from: subTextView, rotating: subCopyImageView)
     }
-    
+
     @IBAction func didTapSwitch(_ sender: Any) {
         performSwitch()
     }
-    
+
     // MARK: - Tools
-    
+
     private func canPerformTranslation() {
         if switchController.fromZone.langage == switchController.toZone.langage {
             ctrlButton.isUserInteractionEnabled = false
@@ -148,7 +148,7 @@ class TranslateViewController: UIViewController {
             ctrlButton.backgroundColor = UIColor.systemGreen
         }
     }
-    
+
     private func copyText(from textView: UITextView, rotating image: UIImageView) {
         guard let currentText = textView.text, currentText.count > 0 else { return }
         UIView.animate(withDuration: 0.5, animations: {
@@ -160,9 +160,9 @@ class TranslateViewController: UIViewController {
             })
         })
     }
-    
+
     // MARK: - Functions
-    
+
     private func createMenu(forZone zone: TranslateZoneController) -> [UIAction] {
         var children = [UIAction]()
         switch zone.position {
@@ -180,29 +180,29 @@ class TranslateViewController: UIViewController {
         }
         return children
     }
-    
+
     private func newMenuAction(forZone zone: TranslateZoneController, withLangage langage: Langage) -> UIAction {
         return UIAction(title: langage.data.name, image: langage.data.flag.toImage()) { _ in
             zone.langage = langage
             self.canPerformTranslation()
         }
     }
-    
-    private func displayTranslation(text: String, from: Langage, to: Langage) {
-        
+
+    private func displayTranslation(text: String, _ fromLangage: Langage, _ toLangage: Langage) {
+
         Shared.startAnimation(of: activityView, locking: ctrlButton)
-        TranslateService.shared.getTranslation(of: text, from: from, to: to) { [weak self] result in
-            
+        TranslateService.shared.getTranslation(of: text, fromLangage, toLangage) { [weak self] result in
+
             DispatchQueue.main.async {
                 Shared.stopAnimation(of: self?.activityView, unlocking: self?.ctrlButton)
                  guard let self = self else { return }
-                 
+
                  switch result {
                  case .failure(let error):
                      print("🔴 Translate service KO.")
                      print(error.localizedDescription)
-                     Shared.ShowError(with: Shared.defaultShowErrorMessage, inView: self)
-                     
+                     Shared.showError(with: Shared.defaultShowErrorMessage, inView: self)
+
                  case .success(let model):
                      print("🟢 Translate service OK.")
                      let text = model.data.translations[0].translatedText
@@ -211,7 +211,7 @@ class TranslateViewController: UIViewController {
              }
         }
     }
-    
+
     private func performSwitch() {
         if ctrlSwitch.isOn {
             UIView.animate(withDuration: 0.5, animations: {
@@ -224,5 +224,4 @@ class TranslateViewController: UIViewController {
         }
         switchController.switchZones()
     }
-    
 }

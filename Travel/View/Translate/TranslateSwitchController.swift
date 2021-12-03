@@ -5,7 +5,7 @@ class TranslateSwitchController {
     var topToSub: Bool
     var fromZone: TranslateZoneController
     var toZone: TranslateZoneController
-    
+
     init(isSwitchedOn: Bool, topZone: TranslateZoneController, subZone: TranslateZoneController) {
         self.topToSub = !isSwitchedOn
         if topToSub {
@@ -16,7 +16,7 @@ class TranslateSwitchController {
             self.toZone = topZone
         }
     }
-    
+
     func switchZones() {
         topToSub = !topToSub
         (fromZone, toZone) = (toZone, fromZone)

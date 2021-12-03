@@ -8,21 +8,25 @@ class WeatherZoneController {
     }
     
     let position: Position
-    
+
     private weak var backgroundView: UIView!
     private weak var cityLabel: UILabel!
     private weak var countryLabel: UILabel!
     private weak var tempLabel: UILabel!
     private weak var weatherLabel: UILabel!
     private weak var weatherImageView: UIImageView!
-    
+
     private enum Label: String {
         case city = "Ville"
         case temp = "Température : "
         case weather = "Temps : "
     }
-    
-    init(position: Position, background: UIView, city: UILabel, country: UILabel, temp: UILabel, weather: UILabel, image: UIImageView) {
+
+    init(
+        position: Position, background: UIView,
+        city: UILabel, country: UILabel,
+        temp: UILabel, weather: UILabel,
+        image: UIImageView) {
         self.position = position
         self.backgroundView = background
         self.cityLabel = city
@@ -30,15 +34,15 @@ class WeatherZoneController {
         self.tempLabel = temp
         self.weatherLabel = weather
         self.weatherImageView = image
-        
+
         hideCityTempWeather()
         hideImage()
     }
-    
+
     func setCity(with city: String) {
         cityLabel.text = city
     }
-    
+
     func setCountry(with country: String) {
         countryLabel.text = country
     }
@@ -46,13 +50,13 @@ class WeatherZoneController {
     func setTemp(with temp: String) {
         tempLabel.text = Label.temp.rawValue + temp + " °C"
     }
-    
+
     func setWeather(with weather: String) {
         weatherLabel.text = weather.count > 15 ?
         weather.capitalizingFirstLetter():
         Label.weather.rawValue + weather
     }
-    
+
     func hideCityTempWeather() {
         cityLabel.text = Label.city.rawValue
         countryLabel.text = nil

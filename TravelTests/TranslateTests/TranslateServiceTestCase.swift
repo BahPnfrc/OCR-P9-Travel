@@ -3,16 +3,16 @@ import Foundation
 @testable import Travel
 
 class TranslateServiceTestCase: XCTestCase {
-    
+
     private let timeout = 0.1
     var fakeUrlSession: URLSession!
-    
+
     override func setUpWithError() throws {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [FakeURLProtocol.self]
         fakeUrlSession = URLSession(configuration: configuration)
     }
-    
+
     func testGivenWeatherServiceIsCalled_whenResultIsSuccess_thenRequiredValuesAreNotNil() {
         // Given
         let translateService = TranslateService(session: fakeUrlSession)
@@ -21,11 +21,11 @@ class TranslateServiceTestCase: XCTestCase {
         }
 
         let expectation = XCTestExpectation(description: "Queue change.")
-        translateService.getTranslation(of: "someText", to: .english) { result in
- 
+        translateService.getTranslation(of: "someText", .french, .english) { result in
+
             // When
             switch result {
-            case .failure(_):
+            case .failure:
                 XCTFail("Found .failure where .success was expected.")
             case .success(let model):
                 // Then
@@ -35,6 +35,4 @@ class TranslateServiceTestCase: XCTestCase {
         }
         wait(for: [expectation], timeout: timeout)
     }
-    
-    
 }

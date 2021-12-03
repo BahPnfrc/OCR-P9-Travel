@@ -1,33 +1,33 @@
 import Foundation
 
 class CurrencyService {
-    
+
     static let shared = CurrencyService()
     private init() {}
-    
+
     private var task: URLSessionDataTask?
     private var session = URLSession(configuration: .default)
-    
+
     init(session: URLSession) {
         self.session = session
     }
-    
+
     // MARK: - Parameters
-    
+
     // https://fixer.io/documentation
     // https://developer.apple.com/news/?id=jxky8h89
     private let baseUrl = "http://data.fixer.io/api/latest"
-    
+
     private enum QueryItem: String {
         case token = "access_key"
         case currency = "from"
     }
-    
+
     // MARK: - Network result handling
-    
+
     func getRate(completion: @escaping (Result<CurrencyResult, ApiError>) -> Void) {
         getAllRates(ofCurrency: .euro) { result in
-            
+
             let defaultCurrency = Currency.usDollar
             switch result {
             case .failure(let error):
@@ -44,31 +44,33 @@ class CurrencyService {
             }
         }
     }
-    
+
     // MARK: - Network call
-    
-    private func getAllRates(ofCurrency currency: Currency, completion: @escaping (Result<CurrencyJson, ApiError>) -> Void) {
-        
+
+    private func getAllRates(
+        ofCurrency currency: Currency,
+        completion: @escaping (Result<CurrencyJson, ApiError>) -> Void) {
+
         guard var urlComponents = URLComponents(string: baseUrl) else {
             completion(.failure(.url))
             return
         }
-        
+
         urlComponents.queryItems = [
             URLQueryItem(name: QueryItem.token.rawValue, value: Token.forCurrency),
             URLQueryItem(name: QueryItem.currency.rawValue, value: currency.rawValue)
         ]
-        
+
         guard let components = urlComponents.string, let url = URL(string: components) else {
             completion(.failure(.query))
             return
         }
-        
+
         let request = URLRequest(url: url)
-        
+
         task?.cancel()
         task = session.dataTask(with: request) { (data, response, error) in
-            
+
             guard let data = data, error == nil, let response = response as? HTTPURLResponse,
                   response.statusCode == 200 else {
                       completion(.failure(.server))
@@ -82,5 +84,5 @@ class CurrencyService {
         }
         task?.resume()
     }
-    
+
 }

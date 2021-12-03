@@ -12,6 +12,7 @@ class CurrencySwitchController {
     }
     
     func switchZones() {
+        isDollarToEuro = !isDollarToEuro
         (fromZone, toZone) = (toZone, fromZone)
     }
 }

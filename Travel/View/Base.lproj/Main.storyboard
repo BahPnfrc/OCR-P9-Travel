@@ -742,7 +742,7 @@
                         <outlet property="ctrlButton" destination="FdR-D3-b2x" id="8RI-eK-FEG"/>
                         <outlet property="ctrlSwitch" destination="ZBS-Ws-Awm" id="ork-NH-3g0"/>
                         <outlet property="ctrlView" destination="fFi-kt-Ylb" id="83b-vR-vmu"/>
-                        <outlet property="fromTextField" destination="91o-xf-22e" id="urj-lv-xvb"/>
+                        <outlet property="fromAmountTextField" destination="91o-xf-22e" id="urj-lv-xvb"/>
                         <outlet property="fromView" destination="P4Q-Ak-POC" id="fW8-Lw-7hQ"/>
                         <outlet property="mainMoneyHeaderLabel" destination="vPn-u4-TRf" id="0Kv-0y-NKF"/>
                         <outlet property="mainMoneyStack" destination="R1a-Bs-GIn" id="DvI-0e-Txo"/>
@@ -757,7 +757,7 @@
                         <outlet property="subMoneyView" destination="gyL-Qn-32t" id="ju2-kK-Naa"/>
                         <outlet property="timeStampHeaderLabel" destination="Av8-dr-EXu" id="g74-De-GNW"/>
                         <outlet property="timeStampValueLabel" destination="0ls-JP-GHD" id="9XM-KA-icC"/>
-                        <outlet property="toMainLabel" destination="E80-Wn-fEg" id="tL4-cJ-Nr3"/>
+                        <outlet property="toAmountLabel" destination="E80-Wn-fEg" id="tL4-cJ-Nr3"/>
                         <outlet property="toView" destination="i2j-1F-kfJ" id="yFY-s9-gee"/>
                         <outlet property="topMoneyView" destination="5Gh-de-RcX" id="OUT-EU-v0V"/>
                     </connections>

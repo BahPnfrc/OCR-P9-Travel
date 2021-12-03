@@ -3,7 +3,7 @@ import Foundation
 // https://cloud.google.com/translate/docs/languages
 
 enum Langage: String, CaseIterable {
-    
+
     case french = "fr"
     case english = "en"
     case italian = "it"
@@ -15,7 +15,7 @@ enum Langage: String, CaseIterable {
     case japanese = "ja"
     case hebrew = "he"
     case arabic = "ar"
-    
+
     var data: (name: String, flag: String, isExtra: Bool) {
         switch self {
         case .french: return ("Français", "🇫🇷", false)
@@ -31,9 +31,8 @@ enum Langage: String, CaseIterable {
         case .arabic: return ("Arabe", "🇸🇦", true)
         }
     }
-    
+
     var toLabel: String {
         return self.data.name + " " + self.data.flag
     }
-    
 }

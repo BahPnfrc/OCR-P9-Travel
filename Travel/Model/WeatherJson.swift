@@ -17,7 +17,7 @@ struct WeatherJson: Codable {
             case pressure, humidity
         }
     }
-    
+
     // MARK: - Weather
     struct Weather: Codable {
         let id: Int?
@@ -29,7 +29,7 @@ struct WeatherJson: Codable {
             case icon
         }
     }
-    
+
     // MARK: - Sys
     struct Sys: Codable {
         let country: String
