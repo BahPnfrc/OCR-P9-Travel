@@ -39,7 +39,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppBackground" translatesAutoresizingMaskIntoConstraints="NO" id="siU-ay-Wsf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppBackground" translatesAutoresizingMaskIntoConstraints="NO" id="siU-ay-Wsf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDO-mI-fLE">
@@ -419,7 +419,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppBackground" translatesAutoresizingMaskIntoConstraints="NO" id="edi-w7-Rr7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppBackground" translatesAutoresizingMaskIntoConstraints="NO" id="edi-w7-Rr7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAd-Ng-Xmv">
@@ -774,7 +774,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tWj-l6-fwa">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tWj-l6-fwa">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJ3-1h-gFh">
@@ -811,20 +811,20 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xx-31-hrl">
-                                                <rect key="frame" x="0.0" y="36" width="314" height="90"/>
+                                                <rect key="frame" x="0.0" y="36" width="314" height="60"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-oT-WRp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="294" height="90"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="294" height="60"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="90" id="Ur7-b5-laS"/>
+                                                            <constraint firstAttribute="height" constant="60" id="Ur7-b5-laS"/>
                                                         </constraints>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcN-0n-yRY">
-                                                        <rect key="frame" x="294" y="0.0" width="20" height="90"/>
+                                                        <rect key="frame" x="294" y="0.0" width="20" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="U2D-RP-lyu"/>
                                                         </constraints>
@@ -876,20 +876,20 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vyc-Ww-G3O">
-                                                <rect key="frame" x="0.0" y="36" width="314" height="90"/>
+                                                <rect key="frame" x="0.0" y="36" width="314" height="60"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hs5-UG-u6V">
-                                                        <rect key="frame" x="0.0" y="0.0" width="294" height="90"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="294" height="60"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="90" id="V58-Kt-LaX"/>
+                                                            <constraint firstAttribute="height" constant="60" id="V58-Kt-LaX"/>
                                                         </constraints>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rbp-RZ-gcH">
-                                                        <rect key="frame" x="294" y="0.0" width="20" height="90"/>
+                                                        <rect key="frame" x="294" y="0.0" width="20" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="gdh-rD-qAQ"/>
                                                         </constraints>
