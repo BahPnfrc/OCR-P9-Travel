@@ -4,14 +4,14 @@ import UIKit
 class WeatherViewController: UIViewController {
 
     // MARK: - Outlets
-    
+
     @IBOutlet weak var defView: UIView!
     @IBOutlet weak var defCityLabel: UILabel!
     @IBOutlet weak var defTempLabel: UILabel!
     @IBOutlet weak var defWeatherLabel: UILabel!
     @IBOutlet weak var defWeatherImageView: UIImageView!
     @IBOutlet weak var defCountryLabel: UILabel!
-    
+
     @IBOutlet weak var userView: UIView!
     @IBOutlet weak var userCityLabel: UILabel!
     @IBOutlet weak var userTempLabel: UILabel!
@@ -36,12 +36,13 @@ class WeatherViewController: UIViewController {
     var defUnit: Units = .metric
     var defZone: WeatherZoneController!
     var userZone: WeatherZoneController!
-    
+
     // MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Match each zone to a Zone controller so they can receive their own data
         defZone = WeatherZoneController(
             position: .top,
             background: defView,
@@ -69,7 +70,6 @@ class WeatherViewController: UIViewController {
         ctrlTextField.becomeFirstResponder()
     }
 
-    /// Func applying initial painting to views
     private func paint() {
         for container in [defView, userView, ctrlView ] {
             container?.backgroundColor = Painting.defViewColor
@@ -79,7 +79,7 @@ class WeatherViewController: UIViewController {
         activityView.hidesWhenStopped = true
     }
 
-    /// Func moving display to an initial position where user searched weather view  is hidden
+    /// Func to move all views to an initial position where the user's searched zone  is hidden
     private func initialPosition() {
         guard let userViewPosition = userView.superview?.convert(userView.frame.origin, to: nil),
               let ctrlViewPosition = ctrlView.superview?.convert(ctrlView.frame.origin, to: nil)
@@ -96,7 +96,7 @@ class WeatherViewController: UIViewController {
         })
     }
 
-    /// Func restoring position of views so user searched weather is visible
+    /// Func to restore the position of all views so the user's searched zone is visible
     private func restorePosition() {
         guard isAtInitialPosition else { return }
         UIView.animate(withDuration: 0.5, animations: {
@@ -173,6 +173,7 @@ class WeatherViewController: UIViewController {
 
     // MARK: Image functions
 
+    /// Function to show  an image matching the data returned by a `weatherModel` result to a given `zone`
     private func displayImage(fromModel weatherModel: WeatherJson, toZone zone: WeatherZoneController) {
 
         guard !weatherModel.weather.isEmpty else { return }
@@ -190,7 +191,7 @@ class WeatherViewController: UIViewController {
         }
     }
 
-    /// Func getting API distant image if the native version is not found
+    /// Func to get API distant image from its `code` if the native version is not found
     private func getDistantImage(forCode code: String, forZone zone: WeatherZoneController) {
         WeatherService.shared.getIcon(forCode: code) { result in
             DispatchQueue.main.async {
@@ -220,6 +221,7 @@ extension WeatherViewController {
         case icon13
         case icon50
 
+        /// Match the icon's code given by the API with iOS native icon
         var systemImage: String {
             switch self {
             case .icon01: return "sun.max" // clear sky

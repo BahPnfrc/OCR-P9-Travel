@@ -25,6 +25,7 @@ class CurrencyService {
 
     // MARK: - Network result handling
 
+    /// Get all rates of conversions and turn them into a simplified `CurrencyResult` object
     func getRate(completion: @escaping (Result<CurrencyResult, ApiError>) -> Void) {
         getAllRates(ofCurrency: .euro) { result in
 
@@ -47,6 +48,7 @@ class CurrencyService {
 
     // MARK: - Network call
 
+    /// Get all rates of conversion from Euro
     private func getAllRates(
         ofCurrency currency: Currency,
         completion: @escaping (Result<CurrencyJson, ApiError>) -> Void) {

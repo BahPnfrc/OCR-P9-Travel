@@ -2,21 +2,21 @@ import Foundation
 import UIKit
 
 class CurrencyViewController: UIViewController {
-    
+
     // MARK: - Outlets
-    
+
     @IBOutlet weak var rateView: UIView!
     @IBOutlet weak var rateHeaderLabel: UILabel!
     @IBOutlet weak var rateValueLabel: UILabel!
     @IBOutlet weak var timeStampHeaderLabel: UILabel!
     @IBOutlet weak var timeStampValueLabel: UILabel!
-    
+
     @IBOutlet weak var toView: UIView!
     @IBOutlet weak var toAmountLabel: UILabel!
-    
+
     @IBOutlet weak var topMoneyView: UIView!
     @IBOutlet weak var subMoneyView: UIView!
-    
+
     @IBOutlet weak var mainMoneyStack: UIStackView!
     @IBOutlet weak var mainMoneyHeaderLabel: UILabel!
     @IBOutlet weak var mainMoneySubLabel: UILabel!
@@ -24,9 +24,9 @@ class CurrencyViewController: UIViewController {
     @IBOutlet weak var secondMoneyStack: UIStackView!
     @IBOutlet weak var secondMoneyHeaderLabel: UILabel!
     @IBOutlet weak var secondMoneySubLabel: UILabel!
-    
+
     @IBOutlet weak var orderImageView: UIImageView!
-    
+
     @IBOutlet weak var fromView: UIView!
     @IBOutlet weak var fromAmountTextField: UITextField!
 
@@ -36,20 +36,21 @@ class CurrencyViewController: UIViewController {
 
     @IBOutlet weak var clearTextImageView: UIImageView!
     @IBOutlet weak var activityView: UIActivityIndicatorView!
-    
+
     // MARK: - Properties
-    
+
     var topZoneController: CurrencyZoneController!
     var subZoneController: CurrencyZoneController!
     var switchController: CurrencySwitchController!
     var currentCurrency: Currency = .usDollar
     var lastSearchResult: CurrencyResult?
-    
+
     // MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Match each zone to a Zone controller so they can be used in a Switch controller
         topZoneController = CurrencyZoneController(
             headerLabel: mainMoneyHeaderLabel,
             textLabel: mainMoneySubLabel,
@@ -58,17 +59,18 @@ class CurrencyViewController: UIViewController {
             headerLabel: secondMoneyHeaderLabel,
             textLabel: secondMoneySubLabel,
             currency: .euro)
+        // Assign each zone to a Swith controller that can switch them
         switchController = CurrencySwitchController(
             isSwitchedOn: ctrlSwitch.isOn,
             topZone: topZoneController,
             subZone: subZoneController)
 
         CurrencyLegacy.printAll()
-        
+
         if let euroToDollar = CurrencyLegacy.euroToDollarRate,
            let dollarToEuro = CurrencyLegacy.dollarToEuroRate,
            let timeStamp = CurrencyLegacy.timeStamp {
-            
+
             print("🟣 Currency from UserDefault.")
             let userDefault = CurrencyResult(
                 euroToDollar: euroToDollar,
@@ -89,7 +91,7 @@ class CurrencyViewController: UIViewController {
 
         paint()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fromAmountTextField.becomeFirstResponder()
@@ -108,7 +110,7 @@ class CurrencyViewController: UIViewController {
         rateHeaderLabel.text = "Taux : "
         timeStampHeaderLabel.text = "Date : "
     }
-    
+
     // MARK: - Actions
 
     @IBAction func didTapButton(_ sender: Any) {

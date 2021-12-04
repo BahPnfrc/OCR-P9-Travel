@@ -66,5 +66,4 @@ class TranslateService {
         }
         task?.resume()
     }
-    
 }

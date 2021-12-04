@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 class WeatherZoneController {
-    
+
     enum Position {
         case top, sub
     }
-    
+
     let position: Position
 
     private weak var backgroundView: UIView!
@@ -46,7 +46,7 @@ class WeatherZoneController {
     func setCountry(with country: String) {
         countryLabel.text = country
     }
-    
+
     func setTemp(with temp: String) {
         tempLabel.text = Label.temp.rawValue + temp + " °C"
     }
@@ -63,12 +63,12 @@ class WeatherZoneController {
         tempLabel.text = Label.temp.rawValue
         weatherLabel.text = Label.weather.rawValue
     }
-    
+
     func setImage(with image: UIImage) {
         weatherImageView.isHidden = false
         weatherImageView.image = image
     }
-    
+
     func hideImage() {
         weatherImageView.isHidden = true
         weatherImageView.image = nil

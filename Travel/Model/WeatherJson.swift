@@ -3,7 +3,7 @@ import Foundation
 struct WeatherJson: Codable {
     let name: String
     let cod: Int
-    
+
     // MARK: - Main
     struct Main: Codable {
         let temp, feelsLike, tempMin, tempMax: Double
@@ -35,7 +35,7 @@ struct WeatherJson: Codable {
         let country: String
         let sunrise, sunset: Int
     }
-    
+
     let weather: [Weather]
     let main: Main
     let sys: Sys

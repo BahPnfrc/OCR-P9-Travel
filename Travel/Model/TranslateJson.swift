@@ -6,11 +6,10 @@ struct TranslateJson: Codable {
     // MARK: - DataClass
     struct DataClass: Codable {
         let translations: [Translation]
-
-        // MARK: - Translation
-        struct Translation: Codable {
-            let translatedText: String
-        }
     }
-    
+
+    // MARK: - Translation
+    struct Translation: Codable {
+        let translatedText: String
+    }
 }

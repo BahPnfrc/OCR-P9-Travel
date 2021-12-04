@@ -16,6 +16,7 @@ enum Langage: String, CaseIterable {
     case hebrew = "he"
     case arabic = "ar"
 
+    /// Tuple value `isExtra` means the langage is not required in a button's menu
     var data: (name: String, flag: String, isExtra: Bool) {
         switch self {
         case .french: return ("Français", "🇫🇷", false)

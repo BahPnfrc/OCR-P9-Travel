@@ -71,13 +71,14 @@ class WeatherService {
     }
 
     // MARK: - Icon call
-    
+
     private let iconURL = "https://openweathermap.org/img/wn/\(IconQueryItem.forCode.rawValue)@2x.png"
 
     private enum IconQueryItem: String {
             case forCode = "--code--"
         }
 
+    /// Retun the API icone as UIImage for the provided `code` as returned by the `getWeather` function
     func getIcon(forCode code: String, completion: @escaping (Result<UIImage, ApiError>) -> Void) {
 
         let iconUrl = iconURL.replacingOccurrences(of: IconQueryItem.forCode.rawValue, with: code)

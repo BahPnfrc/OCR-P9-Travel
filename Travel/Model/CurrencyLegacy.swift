@@ -1,7 +1,7 @@
 import Foundation
 
 class CurrencyLegacy {
-    
+
     private struct Keys {
         static let euroToDollarRate = "euroToDollarRate"
         static let dollarToEuroRate = "dollarToEuroRate"

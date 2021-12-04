@@ -4,7 +4,7 @@ class CurrencyResult {
     let euroToDollarRate: Double
     let dollarToEuroRate: Double
     let timeStamp: String
-    
+
     init(rate: Double, timeStamp: Int) {
         self.euroToDollarRate = rate
         self.dollarToEuroRate = 1 / rate
@@ -36,7 +36,7 @@ class CurrencyResult {
     func getDollarToEuro(amount: Double) -> String {
         return getDollarToEuro(amount: amount).toString(2)
     }
-    
+
 }
 
 /*
